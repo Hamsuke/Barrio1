@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Barrio1.Views.VentasListingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:Barrio1.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewmodel="clr-namespace:Barrio1.ViewModels"
+    x:DataType="viewmodel:VentasListingViewModel">
+
+    <ContentPage.Resources>
+        <toolkit:BoolToObjectConverter
+            x:Key="BoolToObjectConverter"
+            FalseObject="Pago pendiente ❌"
+            TrueObject="Pago Completo ✔" />
+    </ContentPage.Resources>
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding GetVentasCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+
+    <Grid
+        Margin="20"
+        RowDefinitions="Auto,*"
+        RowSpacing="10">
+        <Grid Grid.Row="0" ColumnDefinitions="*,*">
+            <Label
+                Grid.Column="0"
+                FontAttributes="Bold"
+                FontSize="Title"
+                Text="Registro de Ventas" />
+            <Button
+                Grid.Column="1"
+                Background="#3ece8e"
+                Command="{Binding AddVentaCommand}"
+                HorizontalOptions="End"
+                Text="Añadir"
+                TextColor="#eff5f3" />
+        </Grid>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Ventas}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Ventas">
+                    <Border
+                        Padding="15"
+                        Stroke="Dimgray"
+                        Background="#601d2021"
+                        StrokeThickness="2">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10,10,10,10" />
+                        </Border.StrokeShape>
+                        <Grid RowDefinitions="Auto,*" RowSpacing="4">
+                            <Grid Grid.Row="0" RowDefinitions="Auto,Auto,Auto">
+                                <Label
+                                    Grid.Row="0"
+                                    FontAttributes="Bold"
+                                    FontSize="Medium"
+                                    Text="{Binding id}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Margin="0,2"
+                                    FontSize="Small"
+                                    Text="{Binding name}" />
+                                <Label
+                                    Grid.Row="2"
+                                    Margin="0,2"
+                                    FontSize="Small"
+                                    Text="{Binding costo}" />
+                                <Grid
+                                    Grid.Row="3"
+                                    Margin="0,5"
+                                    ColumnDefinitions="Auto,Auto,*">
+                                    <Button
+                                        Grid.Column="0"
+                                        BackgroundColor="#4A88DA"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:VentasListingViewModel}}, Path=UpdateVentaCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Text="Actualizar"
+                                        TextColor="#eff5f3" />
+                                    <Label
+                                        Grid.Column="1"
+                                        HorizontalOptions="End"
+                                        Text="{Binding est, Converter={StaticResource BoolToObjectConverter}}"
+                                        LineBreakMode="TailTruncation"
+                                        TextColor="#eff5f3"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Barrio1.Views.UpdateVentaPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:Barrio1.ViewModels"
+    Title="Update Venta"
+    x:DataType="viewmodel:UpdateVentaViewModel">
+    <VerticalStackLayout Margin="20">
+        <Entry Placeholder="Pago" Text="{Binding Venta.pago}" />
+        <Button
+            Background="#4A88DA"
+            Command="{Binding UpdateVentaCommand}"
+            Text="Actualizar"
+            TextColor="#eff5f3" />
+    </VerticalStackLayout>
+</ContentPage>
