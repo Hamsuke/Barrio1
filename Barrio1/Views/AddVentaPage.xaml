@@ -3,18 +3,92 @@
     x:Class="Barrio1.Views.AddVentaPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:Barrio1.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodel="clr-namespace:Barrio1.ViewModels"
     Title="Add Venta"
     x:DataType="viewmodel:AddVentaViewModel"
     >
-    <VerticalStackLayout Margin="20">
-        <Entry Placeholder="Cliente" Text="{Binding VentaCliente}" />
-        <Entry Placeholder="Pago (Si no hay ninguno dejar en 0)" Text="{Binding VentaPago}" />
-        <Entry Placeholder="Costo" Text="{Binding VentaCosto}" />
-        <Button
-            Background="#3ece8e"
-            Command="{Binding AddVentaCommand}"
-            Text="Añadir Venta"
-            TextColor="#eff5f3" />
-    </VerticalStackLayout>
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding GetInventarioCommand}" EventName="Appearing"/>
+    </ContentPage.Behaviors>
+    <ScrollView>
+        <Grid>
+            <Grid Grid.Row="0" Grid.Column="0" HorizontalOptions="Fill">
+                <VerticalStackLayout Margin="20">
+                    <Label Text="Cliente"/>
+                    <Entry Text="{Binding VentaCliente}" />
+                    <Label Text="Pago (Si no hay dejar en 0)" />
+                    <Entry Placeholder="{Binding VentaCosto}"/>
+                    <Label Text="Costo"/>
+                    <Entry/>
+                    <Label HorizontalOptions="Center" Text="Botellas"/>
+                    <Grid>
+                        <Label HorizontalOptions="Start" Text="Solicitud"/>
+                        <Label HorizontalOptions="EndAndExpand" Text="Disponible"/>
+                    </Grid>
+                    <Label/>
+
+                    <Label Text="Llanerita"/>
+                    <Grid>
+                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaLlane}"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockLlane}"/>
+                    </Grid>
+
+                    <Label Text="San Juanera"/>
+                    <Grid>
+                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaSJ}"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockSJ}"/>
+                    </Grid>
+
+                    <Label Text="Maleficio"/>
+                    <Grid>
+                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaMale}" />
+                        <Label HorizontalOptions="End" Text="{Binding StockMale}"/>
+                    </Grid>
+
+                    <Label Text="Barranqueña"/>
+                    <Grid>
+                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaBarra}" />
+                        <Label HorizontalOptions="End" Text="{Binding StockBarra}"/>
+                    </Grid>
+
+                    <Label Text="Toloachi"/>
+                    <Grid>
+                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaTolo}" />
+                        <Label HorizontalOptions="End" Text="{Binding StockTolo}"/>
+                    </Grid>
+
+                    <Label Text="Barrio 21"/>
+                    <Grid>
+                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaB21}" />
+                        <Label HorizontalOptions="End" Text="{Binding StockB21}"/>
+                    </Grid>
+
+                    <Label Text="Genesis"/>
+                    <Grid>
+                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaGen}" />
+                        <Label HorizontalOptions="End" Text="{Binding StockGen}"/>
+                    </Grid>
+
+                    <Label Text="Guasanta"/>
+                    <Grid>
+                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaAguac}" />
+                        <Label HorizontalOptions="End" Text="{Binding StockGuasanta}"/>
+                    </Grid>
+
+                    <Label Text="Agua de charco"/>
+                    <Grid>
+                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaAguac}" />
+                        <Label HorizontalOptions="End" Text="{Binding StockAguac}"/>
+                    </Grid>
+                    <Button
+                    Background="#3ece8e"
+                    Command="{Binding AddVentaCommand}"
+                    Text="Añadir Venta"
+                    TextColor="#eff5f3" />
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
+    </ScrollView>
 </ContentPage>

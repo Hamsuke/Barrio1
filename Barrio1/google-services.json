@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "3396289843",
+    "project_id": "yesnt-ebbf0",
+    "storage_bucket": "yesnt-ebbf0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3396289843:android:64d286a4e4e64a92d7ea46",
+        "android_client_info": {
+          "package_name": "com.companyname.barrio1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZstJ9lb4feR0Gh8f2bjrAmZCPxw9gLqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

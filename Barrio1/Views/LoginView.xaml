@@ -32,7 +32,7 @@
                     Text="{Binding Password}"/>
 
                 <Button Text="Iniciar Sesión"
-                    Command="{Binding LoginCommandCommand}"
+                    Command="{Binding LoginYesCommand}"
                     Margin="0,20,0,0"
                     BackgroundColor="Gray"
                     TextColor="White"/>

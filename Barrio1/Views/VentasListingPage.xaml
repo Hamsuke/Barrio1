@@ -39,7 +39,7 @@
 
         <CollectionView Grid.Row="1" ItemsSource="{Binding Ventas}">
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                <LinearItemsLayout ItemSpacing="6" Orientation="Vertical" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Ventas">
@@ -47,46 +47,65 @@
                         Padding="15"
                         Stroke="Dimgray"
                         Background="#601d2021"
-                        StrokeThickness="2">
+                        StrokeThickness="1">
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="10,10,10,10" />
                         </Border.StrokeShape>
-                        <Grid RowDefinitions="Auto,*" RowSpacing="4">
+                        <Grid RowDefinitions="Auto,*" RowSpacing="10">
                             <Grid Grid.Row="0" RowDefinitions="Auto,Auto,Auto">
                                 <Label
+                                    Grid.Column="1"
                                     Grid.Row="0"
                                     FontAttributes="Bold"
                                     FontSize="Medium"
-                                    Text="{Binding id}" />
+                                    Text="Nota"
+                                    HorizontalOptions="Center"/>
                                 <Label
+                                    Grid.Column="1"
+                                    Grid.Row="1"
+                                    FontAttributes="Bold"
+                                    FontSize="Medium"
+                                    Text="{Binding id}"
+                                    HorizontalOptions="CenterAndExpand"
+                                    />
+                                <Label
+                                    Grid.Column="0"
+                                    Grid.Row="0"
+                                    FontSize="Medium"
+                                    FontAttributes="Bold"
+                                    Text="Cliente"
+                                    HorizontalOptions="Start"/>
+                                <Label
+                                    Grid.Column="0"
                                     Grid.Row="1"
                                     Margin="0,2"
-                                    FontSize="Small"
+                                    FontSize="Medium"
+                                    HorizontalOptions="Start"
                                     Text="{Binding name}" />
                                 <Label
-                                    Grid.Row="2"
-                                    Margin="0,2"
-                                    FontSize="Small"
-                                    Text="{Binding costo}" />
-                                <Grid
-                                    Grid.Row="3"
-                                    Margin="0,5"
-                                    ColumnDefinitions="Auto,Auto,*">
-                                    <Button
-                                        Grid.Column="0"
-                                        BackgroundColor="#4A88DA"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:VentasListingViewModel}}, Path=UpdateVentaCommand}"
-                                        CommandParameter="{Binding .}"
-                                        Text="Actualizar"
-                                        TextColor="#eff5f3" />
-                                    <Label
-                                        Grid.Column="1"
-                                        HorizontalOptions="End"
-                                        Text="{Binding est, Converter={StaticResource BoolToObjectConverter}}"
-                                        LineBreakMode="TailTruncation"
-                                        TextColor="#eff5f3"
-                                        VerticalOptions="Center" />
-                                </Grid>
+                                    Grid.Column="2"
+                                    Grid.Row="0"
+                                    FontSize="Medium"
+                                    FontAttributes="Bold"
+                                    Text="Estado"
+                                    HorizontalOptions="End"/>
+                                <Label
+                                    Grid.Column="2"
+                                    Grid.Row="1"
+                                    HorizontalOptions="End"
+                                    Text="{Binding est, Converter={StaticResource BoolToObjectConverter}}"
+                                    LineBreakMode="TailTruncation"
+                                    TextColor="#eff5f3"
+                                    />
+
+                                <Button
+                                    Grid.Column="10"
+                                    Grid.Row="9"
+                                    BackgroundColor="#4A88DA"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:VentasListingViewModel}}, Path=UpdateVentaCommand}"
+                                    CommandParameter="{Binding .}"
+                                    Text="Actualizar"
+                                    TextColor="#eff5f3" />
                             </Grid>
                         </Grid>
                     </Border>

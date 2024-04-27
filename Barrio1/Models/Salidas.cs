@@ -14,7 +14,7 @@ public class Salidas : BaseModel
     public int llane { get; set; }
 
     [Column("san_juanera")]
-    public int SJ { get; set; }
+    public int sj { get; set; }
 
     [Column("maleficio")]
     public int male { get; set; }

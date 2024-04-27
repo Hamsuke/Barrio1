@@ -23,7 +23,7 @@ public partial class UpdateVentaViewModel : ObservableObject
     {
         if (Venta.pago > 0)
         {
-            await _dataService.UpdateVenta(_venta);
+            await _dataService.UpdateVenta(Venta);
 
             await Shell.Current.GoToAsync("..");
         }
