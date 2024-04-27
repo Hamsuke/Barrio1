@@ -4,7 +4,16 @@ using Barrio1.ViewModels;
 using Barrio1.Views;
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
-using Supabase;
+using Plugin.Firebase.Auth;
+using Plugin.Firebase.Bundled.Shared;
+using Plugin.Firebase.Crashlytics;
+using Microsoft.Maui.LifecycleEvents;
+
+
+#if ANDROID
+using Plugin.Firebase.Bundled.Platforms.Android;
+#endif
+
 
 namespace Barrio1
 {
@@ -29,13 +38,13 @@ namespace Barrio1
             builder.Services.AddSingleton<VentasListingViewModel>();
             builder.Services.AddTransient<AddVentaViewModel>();
             builder.Services.AddTransient<UpdateVentaViewModel>();
-            builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddSingleton<LoginViewModel>();
 
             // Add Views
             builder.Services.AddSingleton<VentasListingPage>();
             builder.Services.AddTransient<AddVentaPage>();
             builder.Services.AddTransient<UpdateVentaPage>();
-            builder.Services.AddTransient<LoginView>();
+            builder.Services.AddSingleton<LoginView>();
 
             // Add Data Service
             builder.Services.AddSingleton<IDataServices, DataServices>();
@@ -45,5 +54,27 @@ namespace Barrio1
 #endif
             return builder.Build();
         }
+
+        //private static MauiAppBuilder RegisterFirebaseServices(this MauiAppBuilder builder)
+        //{
+        //    builder.ConfigureLifecycleEvents(events =>
+        //    {
+        //        events.AddAndroid(Android => Android.OnCreate((activity, _) =>
+        //            CrossFirebase.Initialize(activity, CreateCrossFirebaseSettings())));
+        //        CrossFirebaseCrashlytics.Current.SetCrashlyticsCollectionEnabled(true);
+        //    });
+
+        //    builder.Services.AddSingleton(_ => CrossFirebaseAuth.Current);
+        //    return builder;
+        //}
+
+        //private static CrossFirebaseSettings CreateCrossFirebaseSettings()
+        //{
+        //    return new CrossFirebaseSettings(
+        //        isAuthEnabled: true,
+        //        isCloudMessagingEnabled: true,
+        //        isAnalyticsEnabled: true
+        //        );
+        //}
     }
 }

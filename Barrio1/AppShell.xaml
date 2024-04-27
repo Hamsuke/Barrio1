@@ -9,6 +9,12 @@
     Title="Barrio1">
 
     <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate Views:LoginView}"
+        Route="LoginView"/>
+
+
+    <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate Views:VentasListingPage}"
         Route="VentasListingPage"/>

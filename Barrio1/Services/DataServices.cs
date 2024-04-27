@@ -51,7 +51,7 @@ public class DataServices : IDataServices
     {
         Users tmp = await _supabaseClient.From<Users>()
         .Where(b => b.id == u.id).Single();
-        if (tmp == u)
+        if (tmp.clave == u.clave)
         {
             return true;
         }
@@ -61,7 +61,7 @@ public class DataServices : IDataServices
         }
     }
 
-    public async Task UpdateAlmacen(Salidas ajustes)
+    public async Task UpdateAlmacen(Inventario ajustes)
     {
         var tmp = await _supabaseClient.From<Inventario>().Get();
 
@@ -77,5 +77,11 @@ public class DataServices : IDataServices
             .Set(b => b.guasanta, ajustes.guasanta)
             .Set(b => b.aguac, ajustes.aguac)
             .Update();
+    }
+
+    public async Task<Inventario> GetInventario()
+    {
+        var response = await _supabaseClient.From<Inventario>().Get();
+        return response.Models.FirstOrDefault();
     }
 }

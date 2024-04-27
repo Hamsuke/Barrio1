@@ -7,7 +7,12 @@
     Title="Update Venta"
     x:DataType="viewmodel:UpdateVentaViewModel">
     <VerticalStackLayout Margin="20">
-        <Entry Placeholder="Pago" Text="{Binding Venta.pago}" />
+        <Label Text="Pago"/>
+        <Entry />
+        <Label Text="Saldo pagado"/>
+        <Label Text="{Binding Venta.pago}"/>
+        <Label Text="Costo de venta"/>
+        <Label Text="{Binding Venta.costo}"/>
         <Button
             Background="#4A88DA"
             Command="{Binding UpdateVentaCommand}"

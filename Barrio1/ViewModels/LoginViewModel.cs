@@ -5,8 +5,6 @@ using Barrio1.Models;
 
 namespace Barrio1.ViewModels;
 
-[QueryProperty(nameof(Login), "LoginObject")]
-
 public partial class LoginViewModel : ObservableObject
 {
     private readonly IDataServices _dataServices;
@@ -16,7 +14,7 @@ public partial class LoginViewModel : ObservableObject
     [ObservableProperty]
     private string _password;
     [ObservableProperty]
-    private Users _Login;
+    private Users _login;
 
     public LoginViewModel(IDataServices dataServices)
     {
@@ -24,17 +22,20 @@ public partial class LoginViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public async Task LoginCommand()
+    public async Task LoginYes()
     {
+        Login = new()
+        {
+            id = Username,
+            clave = Password
+        };
         try
         {
             if (!string.IsNullOrEmpty(Username) | !string.IsNullOrEmpty(Password))
             {
-                Login.id = Username;
-                Login.clave = Password;
                 if (await _dataServices.Login(Login))
                 {
-                    //Application.Current.MainPage = new NavigationPage(new VentasListingViewModel());
+                    await Shell.Current.GoToAsync("////VentasListingPage");
                 }
                 else
                 {

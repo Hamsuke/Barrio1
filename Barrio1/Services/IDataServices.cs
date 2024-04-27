@@ -9,5 +9,6 @@ namespace Barrio1.Services
         Task UpdateVenta(Ventas venta);
         Task<bool> Login(Users u);
         Task UpdateAlmacen(Inventario ajustes);
+        Task<Inventario> GetInventario();
     }
 }

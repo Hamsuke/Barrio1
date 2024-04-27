@@ -1,4 +1,5 @@
-﻿using Barrio1.Views;
+﻿using Barrio1.ViewModels;
+using Barrio1.Views;
 
 namespace Barrio1
 {
@@ -10,7 +11,6 @@ namespace Barrio1
 
             RegisterForRoute<AddVentaPage>();
             RegisterForRoute<UpdateVentaPage>();
-            RegisterForRoute<LoginView>();
         }
 
         protected void RegisterForRoute<T>()
