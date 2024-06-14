@@ -32,12 +32,21 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
+		<AndroidPackageFormat>apk</AndroidPackageFormat>
+		<AndroidKeyStore>False</AndroidKeyStore>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
+		<AndroidKeyStore>False</AndroidKeyStore>
+	</PropertyGroup>
+
 	<ItemGroup>
-		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+
+		<MauiIcon Include="Resources\AppIcon\appicon.png" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#FFFFFF" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -51,7 +60,60 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Remove="Platforms\Android\Resources\values\Strings.xml" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-anydpi-v26\appicon.xml" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-hdpi\appicon.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-hdpi\appicon_background.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-hdpi\appicon_foreground.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-hdpi\appicon_monochrome.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-mdpi\appicon.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-mdpi\appicon_background.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-mdpi\appicon_foreground.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-mdpi\appicon_monochrome.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-xhdpi\appicon.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-xhdpi\appicon_background.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-xhdpi\appicon_foreground.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-xhdpi\appicon_monochrome.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-xxhdpi\appicon.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-xxhdpi\appicon_background.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-xxhdpi\appicon_foreground.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-xxhdpi\appicon_monochrome.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-xxxhdpi\appicon.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-xxxhdpi\appicon_background.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-xxxhdpi\appicon_foreground.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-xxxhdpi\appicon_monochrome.png" />
+		<AndroidResource Remove="Platforms\Android\Resources\values\Strings.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-anydpi-v26\appicon.xml" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-hdpi\appicon.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-hdpi\appicon_background.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-hdpi\appicon_foreground.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-hdpi\appicon_monochrome.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-mdpi\appicon.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-mdpi\appicon_background.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-mdpi\appicon_foreground.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-mdpi\appicon_monochrome.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-xhdpi\appicon.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-xhdpi\appicon_background.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-xhdpi\appicon_foreground.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-xhdpi\appicon_monochrome.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-xxhdpi\appicon.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-xxhdpi\appicon_background.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-xxhdpi\appicon_foreground.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-xxhdpi\appicon_monochrome.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-xxxhdpi\appicon.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-xxxhdpi\appicon_background.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-xxxhdpi\appicon_foreground.png" />
+		<EmbeddedResource Include="Platforms\Android\Resources\mipmap\mipmap-xxxhdpi\appicon_monochrome.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<MauiAsset Include="Resources\AppIcon\appicon.svg" />
+		<MauiAsset Include="Resources\AppIcon\appiconfg.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -69,6 +131,9 @@
 		<MauiXaml Update="Views\AddVentaPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Views\InventarioPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Views\LoginView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -80,6 +145,10 @@
 		</MauiXaml>
 	</ItemGroup>
 
-	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionBarrio1HideInfoBar="True" /></VisualStudio></ProjectExtensions>
+	<ProjectExtensions>
+		<VisualStudio>
+			<UserProperties XamarinHotReloadDebuggerTimeoutExceptionBarrio1HideInfoBar="True" />
+		</VisualStudio>
+	</ProjectExtensions>
 
 </Project>

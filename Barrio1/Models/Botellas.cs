@@ -3,9 +3,9 @@ using Postgrest.Models;
 
 namespace Barrio1.Models;
 
-[Table("inventario")]
+[Table("botellas")]
 
-public class Inventario : BaseModel
+public class Botellas : BaseModel
 {
     [PrimaryKey("id", false)]
     public int id { get; set; }
@@ -34,6 +34,4 @@ public class Inventario : BaseModel
     [Column("guasanta")]
     public int guasanta { get; set; }
 
-    [Column("agua_charco")]
-    public int aguac { get; set; }
 }

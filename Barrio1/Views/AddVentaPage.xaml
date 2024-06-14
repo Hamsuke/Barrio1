@@ -11,6 +11,7 @@
     >
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior Command="{Binding GetInventarioCommand}" EventName="Appearing"/>
+        <toolkit:EventToCommandBehavior Command="{Binding GetBarrilesCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
     <ScrollView>
         <Grid>
@@ -18,10 +19,25 @@
                 <VerticalStackLayout Margin="20">
                     <Label Text="Cliente"/>
                     <Entry Text="{Binding VentaCliente}" />
-                    <Label Text="Pago (Si no hay dejar en 0)" />
-                    <Entry Placeholder="{Binding VentaCosto}"/>
+                    <Grid>
+                        <Label Text="Pago (Si no hay dejar en 0)" />
+                    </Grid>
+                    <Grid>
+                        <Entry Grid.Column="0" HorizontalOptions="Start"  Keyboard="Numeric" Placeholder="{Binding VentaCosto}"/>
+                        <Picker Grid.Column="1" HorizontalOptions="EndAndExpand"
+                                Title="Metodo de pago">
+                            <Picker.Items>
+                                <x:String>Tarjeta</x:String>
+                                <x:String>Transferencia</x:String>
+                                <x:String>Efectivo</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </Grid>
+
                     <Label Text="Costo"/>
-                    <Entry/>
+                    <Grid>
+                        <Entry Grid.Column="0" HorizontalOptions="Start" Keyboard="Numeric"/>
+                    </Grid>
                     <Label HorizontalOptions="Center" Text="Botellas"/>
                     <Grid>
                         <Label HorizontalOptions="Start" Text="Solicitud"/>
@@ -31,57 +47,107 @@
 
                     <Label Text="Llanerita"/>
                     <Grid>
-                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaLlane}"/>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaLlane}"/>
                         <Label HorizontalOptions="End" Text="{Binding StockLlane}"/>
                     </Grid>
 
                     <Label Text="San Juanera"/>
                     <Grid>
-                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaSJ}"/>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaSJ}"/>
                         <Label HorizontalOptions="End" Text="{Binding StockSJ}"/>
                     </Grid>
 
                     <Label Text="Maleficio"/>
                     <Grid>
-                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaMale}" />
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaMale}" />
                         <Label HorizontalOptions="End" Text="{Binding StockMale}"/>
                     </Grid>
 
                     <Label Text="Barranqueña"/>
                     <Grid>
-                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaBarra}" />
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBarra}" />
                         <Label HorizontalOptions="End" Text="{Binding StockBarra}"/>
                     </Grid>
 
                     <Label Text="Toloachi"/>
                     <Grid>
-                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaTolo}" />
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaTolo}" />
                         <Label HorizontalOptions="End" Text="{Binding StockTolo}"/>
                     </Grid>
 
                     <Label Text="Barrio 21"/>
                     <Grid>
-                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaB21}" />
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaB21}" />
                         <Label HorizontalOptions="End" Text="{Binding StockB21}"/>
                     </Grid>
 
                     <Label Text="Genesis"/>
                     <Grid>
-                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaGen}" />
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaGen}" />
                         <Label HorizontalOptions="End" Text="{Binding StockGen}"/>
                     </Grid>
 
                     <Label Text="Guasanta"/>
                     <Grid>
-                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaAguac}" />
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaGuasanta}" />
                         <Label HorizontalOptions="End" Text="{Binding StockGuasanta}"/>
                     </Grid>
 
-                    <Label Text="Agua de charco"/>
+                    <Label HorizontalOptions="Center" Text="Barriles"/>
                     <Grid>
-                        <Entry HorizontalOptions="StartAndExpand" Text="{Binding SalidaAguac}" />
-                        <Label HorizontalOptions="End" Text="{Binding StockAguac}"/>
+                        <Label HorizontalOptions="Start" Text="Solicitud"/>
+                        <Label HorizontalOptions="EndAndExpand" Text="Disponible"/>
                     </Grid>
+                    <Label/>
+
+                    <Label Text="Llanerita"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaLlane}"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockBaLlane}"/>
+                    </Grid>
+
+                    <Label Text="San Juanera"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaSJ}"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockBaSJ}"/>
+                    </Grid>
+
+                    <Label Text="Maleficio"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaMale}" />
+                        <Label HorizontalOptions="End" Text="{Binding StockBaMale}"/>
+                    </Grid>
+
+                    <Label Text="Barranqueña"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaBarra}" />
+                        <Label HorizontalOptions="End" Text="{Binding StockBaBarra}"/>
+                    </Grid>
+
+                    <Label Text="Toloachi"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaTolo}" />
+                        <Label HorizontalOptions="End" Text="{Binding StockBaTolo}"/>
+                    </Grid>
+
+                    <Label Text="Barrio 21"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaB21}" />
+                        <Label HorizontalOptions="End" Text="{Binding StockBaB21}"/>
+                    </Grid>
+
+                    <Label Text="Genesis"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaGen}" />
+                        <Label HorizontalOptions="End" Text="{Binding StockBaGen}"/>
+                    </Grid>
+
+                    <Label Text="Guasanta"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaGuasanta}" />
+                        <Label HorizontalOptions="End" Text="{Binding StockBaGuasanta}"/>
+                    </Grid>
+
                     <Button
                     Background="#3ece8e"
                     Command="{Binding AddVentaCommand}"

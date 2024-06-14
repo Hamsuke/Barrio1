@@ -14,8 +14,6 @@ public partial class AddVentaViewModel : ObservableObject
     [ObservableProperty]
     private string _ventaCliente;
     [ObservableProperty]
-    private string _ventaVendedor;
-    [ObservableProperty]
     private DateTime _ventaFechaC;
     [ObservableProperty]
     private DateTime _ventaFechaP;
@@ -25,6 +23,8 @@ public partial class AddVentaViewModel : ObservableObject
     private float _ventaPago;
     [ObservableProperty]
     private float _ventaCosto;
+
+    //Salida Botellas
     [ObservableProperty]
     private int _salidaLlane;
     [ObservableProperty]
@@ -41,10 +41,9 @@ public partial class AddVentaViewModel : ObservableObject
     private int _salidaGen;
     [ObservableProperty]
     private int _salidaGuasanta;
-    [ObservableProperty]
-    private int _salidaAguac;
 
-    //Inventario
+
+    //InventarioBotellas
     [ObservableProperty]
     private int _stockLlane;
     [ObservableProperty]
@@ -61,19 +60,55 @@ public partial class AddVentaViewModel : ObservableObject
     private int _stockGen;
     [ObservableProperty]
     private int _stockGuasanta;
+
+    //Salida Barriles
     [ObservableProperty]
-    private int _stockAguac;
+    private int _salidaBaLlane;
+    [ObservableProperty]
+    private int _salidaBaSJ;
+    [ObservableProperty]
+    private int _salidaBaMale;
+    [ObservableProperty]
+    private int _salidaBaBarra;
+    [ObservableProperty]
+    private int _salidaBaTolo;
+    [ObservableProperty]
+    private int _salidaBaB21;
+    [ObservableProperty]
+    private int _salidaBaGen;
+    [ObservableProperty]
+    private int _salidaBaGuasanta;
+
+    //InventarioBotellas
+    [ObservableProperty]
+    private int _stockBaLlane;
+    [ObservableProperty]
+    private int _stockBaSJ;
+    [ObservableProperty]
+    private int _stockBaMale;
+    [ObservableProperty]
+    private int _stockBaBarra;
+    [ObservableProperty]
+    private int _stockBaTolo;
+    [ObservableProperty]
+    private int _stockBaB21;
+    [ObservableProperty]
+    private int _stockBaGen;
+    [ObservableProperty]
+    private int _stockBaGuasanta;
+
 
     public AddVentaViewModel(IDataServices dataService)
     {
         _dataService = dataService;
     }
-    public ObservableCollection<Inventario> Inventario { get; set; } = new();
+    public ObservableCollection<Botellas> InventarioBo { get; set; } = new();
+    public ObservableCollection<Barriles> InventarioBa { get; set; } = new();
 
     [RelayCommand]
     public async Task GetInventario()
     {
-        Inventario.Clear();
+        InventarioBo.Clear();
 
         var inventario = await _dataService.GetInventario();
 
@@ -85,8 +120,23 @@ public partial class AddVentaViewModel : ObservableObject
         StockB21 = inventario.b21;
         StockGen = inventario.gen;
         StockGuasanta = inventario.guasanta;
-        StockAguac = inventario.aguac;
+    }
 
+    [RelayCommand]
+    public async Task GetBarriles()
+    {
+        InventarioBa.Clear();
+
+        var inventario = await _dataService.GetBarriles();
+
+        StockBaLlane = inventario.llane;
+        StockBaSJ = inventario.SJ;
+        StockBaMale = inventario.male;
+        StockBaBarra = inventario.barra;
+        StockBaTolo = inventario.tolo;
+        StockBaB21 = inventario.b21;
+        StockBaGen = inventario.gen;
+        StockBaGuasanta = inventario.guasanta;
     }
 
     [RelayCommand]
@@ -96,22 +146,24 @@ public partial class AddVentaViewModel : ObservableObject
         {
             if (!string.IsNullOrEmpty(VentaCliente))
             {
-                if ((VentaCosto - VentaPago) > 0)
+
+                if (VentaCosto == VentaPago)
                 {
-                    VentaEstado = false;
+                    VentaEstado = true;
                     VentaFechaP = DateTime.Now;
                 }
                 Ventas venta = new()
                 {
+
                     name = VentaCliente,
-                    vendor = VentaVendedor,
+                    vendor = _dataService.GetUsername(),
                     dateC = DateTime.Now,
                     dateP = VentaFechaP,
                     est = VentaEstado,
                     pago = VentaPago,
                     costo = VentaCosto
                 };
-                Salidas salidas = new()
+                SalidasBotella salidas = new()
                 {
                     llane = SalidaLlane,
                     sj = SalidaSJ,
@@ -121,7 +173,42 @@ public partial class AddVentaViewModel : ObservableObject
                     b21 = SalidaB21,
                     gen = SalidaGen,
                     guasanta = SalidaGuasanta,
-                    aguac = SalidaAguac
+                };
+
+                SalidasBarril salidasBa = new()
+                {
+                    llane = SalidaBaLlane,
+                    sj = SalidaBaSJ,
+                    male = SalidaBaMale,
+                    barra = SalidaBaBarra,
+                    tolo = SalidaBaTolo,
+                    b21 = SalidaBaB21,
+                    gen = SalidaBaGen,
+                    guasanta = SalidaBaGuasanta,
+                };
+
+                Botellas ajuste = new()
+                {
+                    llane = (StockLlane - SalidaLlane),
+                    SJ = (StockSJ - SalidaSJ),
+                    male = (StockMale - SalidaLlane),
+                    barra = (StockBarra - SalidaBarra),
+                    tolo = (StockTolo - SalidaTolo),
+                    b21 = (StockB21 - SalidaB21),
+                    gen = (StockGen - SalidaGen),
+                    guasanta = (StockGuasanta - SalidaGuasanta),
+                };
+
+                Barriles ajustesBa = new()
+                {
+                    llane = (StockBaLlane - SalidaBaLlane),
+                    SJ = (StockBaSJ - SalidaBaSJ),
+                    male = (StockBaMale - SalidaBaLlane),
+                    barra = (StockBaBarra - SalidaBaBarra),
+                    tolo = (StockBaTolo - SalidaBaTolo),
+                    b21 = (StockBaB21 - SalidaBaB21),
+                    gen = (StockBaGen - SalidaBaGen),
+                    guasanta = (StockBaGuasanta - SalidaBaGuasanta),
                 };
 
 
@@ -130,6 +217,9 @@ public partial class AddVentaViewModel : ObservableObject
                 //Console.WriteLine($"FCM token: {token}");
 
                 await _dataService.CreateVenta(venta);
+                await _dataService.CreateSalida(salidas, salidasBa);
+                await _dataService.UpdateAlmacen(ajuste, ajustesBa);
+
                 await Shell.Current.GoToAsync("..");
             }
             else

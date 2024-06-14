@@ -43,6 +43,9 @@ public partial class VentasListingViewModel : ObservableObject
     private async Task AddVenta() => await Shell.Current.GoToAsync("AddVentaPage");
 
     [RelayCommand]
+    private async Task GetInventario() => await Shell.Current.GoToAsync("InventarioPage");
+
+    [RelayCommand]
     private async Task UpdateVenta(Ventas venta) => await Shell.Current.GoToAsync("UpdateVentaPage", new Dictionary<string, object>
     {
         {"VentaObject", venta }
