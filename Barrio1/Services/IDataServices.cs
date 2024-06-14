@@ -6,9 +6,13 @@ namespace Barrio1.Services
     {
         Task<IEnumerable<Ventas>> GetVentas();
         Task CreateVenta(Ventas venta);
+        Task CreateSalida(SalidasBotella salidaBo, SalidasBarril salidaBa);
         Task UpdateVenta(Ventas venta);
         Task<bool> Login(Users u);
-        Task UpdateAlmacen(Inventario ajustes);
-        Task<Inventario> GetInventario();
+        Task UpdateAlmacen(Botellas ajustes, Barriles ajustesBa);
+        Task<Botellas> GetInventario();
+        Task<Barriles> GetBarriles();
+        void SetUsername(string US);
+        string GetUsername();
     }
 }

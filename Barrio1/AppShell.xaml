@@ -6,7 +6,8 @@
     xmlns:local="clr-namespace:Barrio1"
     xmlns:Views="clr-namespace:Barrio1.Views"
     Shell.FlyoutBehavior="Disabled"
-    Title="Barrio1">
+    Title="Barrio1"
+    >
 
     <ShellContent
         Title="Login"

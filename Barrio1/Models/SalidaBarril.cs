@@ -1,13 +1,13 @@
-﻿using Postgrest.Attributes;
+using Postgrest.Attributes;
 using Postgrest.Models;
 
 namespace Barrio1.Models;
 
-[Table("salidas")]
+[Table("salidasbarril")]
 
-public class Salidas : BaseModel
+public class SalidasBarril : BaseModel
 {
-    [PrimaryKey("id", false)]
+    [PrimaryKey("nota", false)]
     public int id { get; set; }
 
     [Column("llanerita")]
@@ -19,7 +19,7 @@ public class Salidas : BaseModel
     [Column("maleficio")]
     public int male { get; set; }
 
-    [Column("barranqueña")]
+    [Column("barranque�a")]
     public int barra { get; set; }
 
     [Column("toloachi")]
@@ -34,6 +34,4 @@ public class Salidas : BaseModel
     [Column("guasanta")]
     public int guasanta { get; set; }
 
-    [Column("agua_charco")]
-    public int aguac { get; set; }
 }

@@ -35,6 +35,7 @@ public partial class LoginViewModel : ObservableObject
             {
                 if (await _dataServices.Login(Login))
                 {
+                    _dataServices.SetUsername(Username);
                     await Shell.Current.GoToAsync("////VentasListingPage");
                 }
                 else

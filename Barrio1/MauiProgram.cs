@@ -35,12 +35,14 @@ namespace Barrio1
             builder.Services.AddSingleton(provider => new Supabase.Client(url, key));
 
             // Add ViewModels
+            builder.Services.AddSingleton<InventarioViewModel>();
             builder.Services.AddSingleton<VentasListingViewModel>();
             builder.Services.AddTransient<AddVentaViewModel>();
             builder.Services.AddTransient<UpdateVentaViewModel>();
             builder.Services.AddSingleton<LoginViewModel>();
 
             // Add Views
+            builder.Services.AddSingleton<InventarioPage>();
             builder.Services.AddSingleton<VentasListingPage>();
             builder.Services.AddTransient<AddVentaPage>();
             builder.Services.AddTransient<UpdateVentaPage>();
