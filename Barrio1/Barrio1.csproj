@@ -43,7 +43,9 @@
 
 	<ItemGroup>
 
-		<MauiIcon Include="Resources\AppIcon\appicon.png" />
+		<MauiIcon Include="Platforms\Android\Resources\mipmap\appicon.png">
+			<IsAppIcon>True</IsAppIcon>
+		</MauiIcon>
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#FFFFFF" BaseSize="128,128" />
@@ -60,6 +62,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<AndroidResource Remove="Platforms\Android\Resources\mipmap\appicon.png" />
 		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-anydpi-v26\appicon.xml" />
 		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-hdpi\appicon.png" />
 		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-hdpi\appicon_background.png" />
@@ -82,6 +85,10 @@
 		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-xxxhdpi\appicon_foreground.png" />
 		<AndroidResource Remove="Platforms\Android\Resources\mipmap\mipmap-xxxhdpi\appicon_monochrome.png" />
 		<AndroidResource Remove="Platforms\Android\Resources\values\Strings.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="Platforms\Android\Resources\mipmap\appicon.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -129,6 +136,9 @@
 
 	<ItemGroup>
 		<MauiXaml Update="Views\AddVentaPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\DetallesPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\InventarioPage.xaml">

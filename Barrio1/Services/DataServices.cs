@@ -4,7 +4,6 @@ using Xamarin.Google.Crypto.Tink.Shaded.Protobuf;
 
 namespace Barrio1.Services;
 
-
 public class DataServices : IDataServices
 {
     private readonly Client _supabaseClient;
@@ -15,6 +14,7 @@ public class DataServices : IDataServices
     {
         _supabaseClient = supabaseClient;
     }
+
     public async Task<IEnumerable<Ventas>> GetVentas()
     {
         var response = await _supabaseClient.From<Ventas>().Get();
@@ -31,7 +31,6 @@ public class DataServices : IDataServices
         await _supabaseClient.From<SalidasBotella>().Insert(salidasBo);
         await _supabaseClient.From<SalidasBarril>().Insert(salidasBa);
     }
-
 
     public async Task UpdateVenta(Ventas venta)
     {
@@ -85,6 +84,7 @@ public class DataServices : IDataServices
             .Set(b => b.b21, ajustes.b21)
             .Set(b => b.gen, ajustes.gen)
             .Set(b => b.guasanta, ajustes.guasanta)
+            .Set(b => b.celi, ajustes.celi)
             .Update();
 
         ajustesBa.id = 1;
@@ -98,6 +98,7 @@ public class DataServices : IDataServices
             .Set(b => b.b21, ajustesBa.b21)
             .Set(b => b.gen, ajustesBa.gen)
             .Set(b => b.guasanta, ajustesBa.guasanta)
+            .Set(b => b.celi, ajustesBa.celi)
             .Update();
     }
 
@@ -122,4 +123,69 @@ public class DataServices : IDataServices
     {
         return _user;
     }
+
+    public async Task<SalidasBotella> GetBotellasNota(int num)
+    {
+        try
+        {
+            SalidasBotella response = await _supabaseClient
+                .From<SalidasBotella>()
+                .Select(x => new object[]
+                {
+                    x.id,
+                    x.llane,
+                    x.male,
+                    x.sj,
+                    x.barra,
+                    x.tolo,
+                    x.b21,
+                    x.gen,
+                    x.guasanta,
+                    x.celi
+                })
+                .Where(x => x.id == num)
+                .Single();
+
+            return response;
+        }
+        catch (Exception ex)
+        {
+            // Maneja la excepción (puedes registrar el error o manejarlo de otra manera)
+            Console.WriteLine($"Error: {ex.Message}");
+            return null; // O lanza una excepción personalizada o un valor por defecto
+        }
+    }
+
+    public async Task<SalidasBarril> GetBarrilesNota(int num)
+    {
+        try
+        {
+            SalidasBarril response = await _supabaseClient
+                .From<SalidasBarril>()
+                .Select(x => new object[]
+                {
+                    x.id,
+                    x.llane,
+                    x.male,
+                    x.sj,
+                    x.barra,
+                    x.tolo,
+                    x.b21,
+                    x.gen,
+                    x.guasanta,
+                    x.celi
+                })
+                .Where(x => x.id == num)
+                .Single();
+
+            return response;
+        }
+        catch (Exception ex)
+        {
+            // Maneja la excepción (puedes registrar el error o manejarlo de otra manera)
+            Console.WriteLine($"Error: {ex.Message}");
+            return null; // O lanza una excepción personalizada o un valor por defecto
+        }
+    }
+
 }

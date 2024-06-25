@@ -3,12 +3,27 @@
     x:Class="Barrio1.Views.UpdateVentaPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:Barrio1.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodel="clr-namespace:Barrio1.ViewModels"
-    Title="Update Venta"
+    Title=""
     x:DataType="viewmodel:UpdateVentaViewModel">
     <VerticalStackLayout Margin="20">
-        <Label Text="Pago"/>
-        <Entry />
+        <Grid ColumnDefinitions="100, 115">
+            <Grid Grid.Column="0" Grid.Row="0">
+                <Label Text="Pago"/>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="0">
+                <Picker Title="Metodo de pago" SelectedItem="{Binding Venta.metodo}">
+                    <Picker.Items>
+                        <x:String>Tarjeta</x:String>
+                        <x:String>Transferencia</x:String>
+                        <x:String>Efectivo</x:String>
+                    </Picker.Items>
+                </Picker>
+            </Grid>
+        </Grid>
+        <Entry Text="{Binding Tmp}"/>
         <Label Text="Saldo pagado"/>
         <Label Text="{Binding Venta.pago}"/>
         <Label Text="Costo de venta"/>

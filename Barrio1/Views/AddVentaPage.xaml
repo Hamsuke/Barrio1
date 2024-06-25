@@ -23,9 +23,9 @@
                         <Label Text="Pago (Si no hay dejar en 0)" />
                     </Grid>
                     <Grid>
-                        <Entry Grid.Column="0" HorizontalOptions="Start"  Keyboard="Numeric" Placeholder="{Binding VentaCosto}"/>
+                        <Entry Grid.Column="0" HorizontalOptions="Start"  Keyboard="Numeric" Text="{Binding VentaPago}"/>
                         <Picker Grid.Column="1" HorizontalOptions="EndAndExpand"
-                                Title="Metodo de pago">
+                                Title="Metodo de pago" SelectedItem="{Binding Metodo}">
                             <Picker.Items>
                                 <x:String>Tarjeta</x:String>
                                 <x:String>Transferencia</x:String>
@@ -33,10 +33,9 @@
                             </Picker.Items>
                         </Picker>
                     </Grid>
-
                     <Label Text="Costo"/>
                     <Grid>
-                        <Entry Grid.Column="0" HorizontalOptions="Start" Keyboard="Numeric"/>
+                        <Entry Grid.Column="0" HorizontalOptions="Start" Keyboard="Numeric" Text="{Binding VentaCosto}"/>
                     </Grid>
                     <Label HorizontalOptions="Center" Text="Botellas"/>
                     <Grid>
@@ -85,6 +84,12 @@
                     <Grid>
                         <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaGen}" />
                         <Label HorizontalOptions="End" Text="{Binding StockGen}"/>
+                    </Grid>
+
+                    <Label Text="Celi"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaCeli}" />
+                        <Label HorizontalOptions="End" Text="{Binding StockCeli}"/>
                     </Grid>
 
                     <Label Text="Guasanta"/>
@@ -140,6 +145,12 @@
                     <Grid>
                         <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaGen}" />
                         <Label HorizontalOptions="End" Text="{Binding StockBaGen}"/>
+                    </Grid>
+
+                    <Label Text="Celi"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaCeli}" />
+                        <Label HorizontalOptions="End" Text="{Binding StockBaCeli}"/>
                     </Grid>
 
                     <Label Text="Guasanta"/>

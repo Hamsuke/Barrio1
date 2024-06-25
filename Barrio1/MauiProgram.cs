@@ -37,16 +37,18 @@ namespace Barrio1
             // Add ViewModels
             builder.Services.AddSingleton<InventarioViewModel>();
             builder.Services.AddSingleton<VentasListingViewModel>();
+            builder.Services.AddSingleton<LoginViewModel>();
             builder.Services.AddTransient<AddVentaViewModel>();
             builder.Services.AddTransient<UpdateVentaViewModel>();
-            builder.Services.AddSingleton<LoginViewModel>();
+            builder.Services.AddTransient<DetallesViewModel>();
 
             // Add Views
             builder.Services.AddSingleton<InventarioPage>();
             builder.Services.AddSingleton<VentasListingPage>();
+            builder.Services.AddSingleton<LoginView>();
             builder.Services.AddTransient<AddVentaPage>();
             builder.Services.AddTransient<UpdateVentaPage>();
-            builder.Services.AddSingleton<LoginView>();
+            builder.Services.AddTransient<DetallesPage>();
 
             // Add Data Service
             builder.Services.AddSingleton<IDataServices, DataServices>();

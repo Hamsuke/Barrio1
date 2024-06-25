@@ -12,6 +12,8 @@ namespace Barrio1.Services
         Task UpdateAlmacen(Botellas ajustes, Barriles ajustesBa);
         Task<Botellas> GetInventario();
         Task<Barriles> GetBarriles();
+        Task<SalidasBotella> GetBotellasNota(int num);
+        Task<SalidasBarril> GetBarrilesNota(int num);
         void SetUsername(string US);
         string GetUsername();
     }

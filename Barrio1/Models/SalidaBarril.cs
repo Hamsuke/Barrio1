@@ -34,4 +34,7 @@ public class SalidasBarril : BaseModel
     [Column("guasanta")]
     public int guasanta { get; set; }
 
+    [Column("celi")]
+    public int celi { get; set; }
+
 }

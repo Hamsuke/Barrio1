@@ -12,6 +12,7 @@ namespace Barrio1
             RegisterForRoute<AddVentaPage>();
             RegisterForRoute<UpdateVentaPage>();
             RegisterForRoute<InventarioPage>();
+            RegisterForRoute<DetallesPage>();
         }
 
         protected void RegisterForRoute<T>()
