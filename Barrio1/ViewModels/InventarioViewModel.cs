@@ -2,7 +2,6 @@ using Barrio1.Models;
 using Barrio1.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Plugin.Firebase.CloudMessaging;
 using System.Collections.ObjectModel;
 
 namespace Barrio1.ViewModels;
@@ -26,9 +25,11 @@ public partial class InventarioViewModel : ObservableObject
     [ObservableProperty]
     private int _stockGen;
     [ObservableProperty]
+    private int _stockCeli;
+    [ObservableProperty]
     private int _stockGuasanta;
 
-    //InventarioBotellas
+    //InventarioBarriles
     [ObservableProperty]
     private int _stockBaLlane;
     [ObservableProperty]
@@ -44,20 +45,19 @@ public partial class InventarioViewModel : ObservableObject
     [ObservableProperty]
     private int _stockBaGen;
     [ObservableProperty]
+    private int _stockBaCeli;
+    [ObservableProperty]
     private int _stockBaGuasanta;
+
 
     public InventarioViewModel(IDataServices dataService)
     {
         _dataService = dataService;
     }
-    public ObservableCollection<Botellas> InventarioBo { get; set; } = new();
-    public ObservableCollection<Barriles> InventarioBa { get; set; } = new();
 
     [RelayCommand]
     public async Task GetInventario()
     {
-        InventarioBo.Clear();
-
         var inventario = await _dataService.GetInventario();
 
         StockLlane = inventario.llane;
@@ -67,13 +67,13 @@ public partial class InventarioViewModel : ObservableObject
         StockTolo = inventario.tolo;
         StockB21 = inventario.b21;
         StockGen = inventario.gen;
+        StockCeli = inventario.celi;
         StockGuasanta = inventario.guasanta;
     }
 
     [RelayCommand]
     public async Task GetBarriles()
     {
-        InventarioBa.Clear();
 
         var inventario = await _dataService.GetBarriles();
 
@@ -85,5 +85,6 @@ public partial class InventarioViewModel : ObservableObject
         StockBaB21 = inventario.b21;
         StockBaGen = inventario.gen;
         StockBaGuasanta = inventario.guasanta;
+        StockBaCeli = inventario.celi;
     }
 }

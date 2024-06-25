@@ -110,7 +110,19 @@
                                     />
 
                                 <Button
-                                    Grid.Column="10"
+                                    HorizontalOptions="EndAndExpand"
+                                    Grid.Column="9"
+                                    Grid.Row="9"
+                                    BackgroundColor="Crimson"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:VentasListingViewModel}}, Path=DetallesNotaCommand}"
+                                    CommandParameter="{Binding .}"
+                                    Text="Detalles"
+                                    TextColor="White"
+                                    />
+
+                                <Button
+                                    HorizontalOptions="StartAndExpand"
+                                    Grid.Column="9"
                                     Grid.Row="9"
                                     BackgroundColor="#4A88DA"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:VentasListingViewModel}}, Path=UpdateVentaCommand}"

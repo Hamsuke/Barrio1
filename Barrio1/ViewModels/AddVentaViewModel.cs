@@ -23,6 +23,8 @@ public partial class AddVentaViewModel : ObservableObject
     private float _ventaPago;
     [ObservableProperty]
     private float _ventaCosto;
+    [ObservableProperty]
+    private string _metodo;
 
     //Salida Botellas
     [ObservableProperty]
@@ -41,6 +43,8 @@ public partial class AddVentaViewModel : ObservableObject
     private int _salidaGen;
     [ObservableProperty]
     private int _salidaGuasanta;
+    [ObservableProperty]
+    private int _salidaCeli;
 
 
     //InventarioBotellas
@@ -60,6 +64,8 @@ public partial class AddVentaViewModel : ObservableObject
     private int _stockGen;
     [ObservableProperty]
     private int _stockGuasanta;
+    [ObservableProperty]
+    private int _stockCeli;
 
     //Salida Barriles
     [ObservableProperty]
@@ -78,6 +84,8 @@ public partial class AddVentaViewModel : ObservableObject
     private int _salidaBaGen;
     [ObservableProperty]
     private int _salidaBaGuasanta;
+    [ObservableProperty]
+    private int _salidaBaCeli;
 
     //InventarioBotellas
     [ObservableProperty]
@@ -96,6 +104,8 @@ public partial class AddVentaViewModel : ObservableObject
     private int _stockBaGen;
     [ObservableProperty]
     private int _stockBaGuasanta;
+    [ObservableProperty]
+    private int _stockBaCeli;
 
 
     public AddVentaViewModel(IDataServices dataService)
@@ -120,6 +130,7 @@ public partial class AddVentaViewModel : ObservableObject
         StockB21 = inventario.b21;
         StockGen = inventario.gen;
         StockGuasanta = inventario.guasanta;
+        StockCeli = inventario.celi;
     }
 
     [RelayCommand]
@@ -137,6 +148,7 @@ public partial class AddVentaViewModel : ObservableObject
         StockBaB21 = inventario.b21;
         StockBaGen = inventario.gen;
         StockBaGuasanta = inventario.guasanta;
+        StockBaCeli = inventario.celi;
     }
 
     [RelayCommand]
@@ -161,7 +173,8 @@ public partial class AddVentaViewModel : ObservableObject
                     dateP = VentaFechaP,
                     est = VentaEstado,
                     pago = VentaPago,
-                    costo = VentaCosto
+                    costo = VentaCosto,
+                    metodo = Metodo
                 };
                 SalidasBotella salidas = new()
                 {
@@ -173,6 +186,7 @@ public partial class AddVentaViewModel : ObservableObject
                     b21 = SalidaB21,
                     gen = SalidaGen,
                     guasanta = SalidaGuasanta,
+                    celi = SalidaCeli,
                 };
 
                 SalidasBarril salidasBa = new()
@@ -185,6 +199,7 @@ public partial class AddVentaViewModel : ObservableObject
                     b21 = SalidaBaB21,
                     gen = SalidaBaGen,
                     guasanta = SalidaBaGuasanta,
+                    celi = SalidaBaCeli,
                 };
 
                 Botellas ajuste = new()
@@ -197,6 +212,7 @@ public partial class AddVentaViewModel : ObservableObject
                     b21 = (StockB21 - SalidaB21),
                     gen = (StockGen - SalidaGen),
                     guasanta = (StockGuasanta - SalidaGuasanta),
+                    celi = (StockCeli - SalidaCeli),
                 };
 
                 Barriles ajustesBa = new()
@@ -209,6 +225,7 @@ public partial class AddVentaViewModel : ObservableObject
                     b21 = (StockBaB21 - SalidaBaB21),
                     gen = (StockBaGen - SalidaBaGen),
                     guasanta = (StockBaGuasanta - SalidaBaGuasanta),
+                    celi = (StockBaCeli - SalidaBaCeli),
                 };
 
 

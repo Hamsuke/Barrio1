@@ -13,6 +13,9 @@ public partial class UpdateVentaViewModel : ObservableObject
     [ObservableProperty]
     private Ventas _venta;
 
+    [ObservableProperty]
+    private float _tmp;
+
     public UpdateVentaViewModel(IDataServices dataService)
     {
         _dataService = dataService;
@@ -21,8 +24,9 @@ public partial class UpdateVentaViewModel : ObservableObject
     [RelayCommand]
     private async Task UpdateVenta()
     {
-        if (Venta.pago > 0)
+        if (Tmp > 0)
         {
+            Venta.pago = Tmp;
             await _dataService.UpdateVenta(Venta);
 
             await Shell.Current.GoToAsync("..");

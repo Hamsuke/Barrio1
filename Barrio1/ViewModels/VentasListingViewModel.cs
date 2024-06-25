@@ -50,4 +50,10 @@ public partial class VentasListingViewModel : ObservableObject
     {
         {"VentaObject", venta }
     });
+
+    [RelayCommand]
+    private async Task DetallesNota(Ventas venta) => await Shell.Current.GoToAsync("DetallesPage", new Dictionary<string, object>
+    {
+        {"VentaObject", venta }
+    });
 }

@@ -30,4 +30,7 @@ public class Ventas : BaseModel
 
     [Column("costo")]
     public float costo { get; set; }
+
+    [Column("metodo")]
+    public string metodo { get; set; }
 }
