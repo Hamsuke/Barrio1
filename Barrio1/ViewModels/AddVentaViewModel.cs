@@ -10,7 +10,11 @@ namespace Barrio1.ViewModels;
 public partial class AddVentaViewModel : ObservableObject
 {
     private readonly IDataServices _dataService;
+    //Nota de venta
+    [ObservableProperty]
+    private int _nota;
 
+    //Datos de venta
     [ObservableProperty]
     private string _ventaCliente;
     [ObservableProperty]
@@ -154,6 +158,7 @@ public partial class AddVentaViewModel : ObservableObject
     [RelayCommand]
     private async Task AddVenta()
     {
+
         try
         {
             if (!string.IsNullOrEmpty(VentaCliente))
@@ -166,7 +171,7 @@ public partial class AddVentaViewModel : ObservableObject
                 }
                 Ventas venta = new()
                 {
-
+                    id = Nota,
                     name = VentaCliente,
                     vendor = _dataService.GetUsername(),
                     dateC = DateTime.Now,
@@ -178,6 +183,7 @@ public partial class AddVentaViewModel : ObservableObject
                 };
                 SalidasBotella salidas = new()
                 {
+                    id = Nota,
                     llane = SalidaLlane,
                     sj = SalidaSJ,
                     male = SalidaMale,
@@ -191,6 +197,7 @@ public partial class AddVentaViewModel : ObservableObject
 
                 SalidasBarril salidasBa = new()
                 {
+                    id = Nota,
                     llane = SalidaBaLlane,
                     sj = SalidaBaSJ,
                     male = SalidaBaMale,

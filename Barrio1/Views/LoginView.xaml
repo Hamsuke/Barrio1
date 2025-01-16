@@ -4,8 +4,6 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodel="clr-namespace:Barrio1.ViewModels"
-    
-    Title="Login"
     x:DataType="viewmodel:LoginViewModel">
     <Grid RowDefinitions=".3*, .7*">
         <Image Source="barrio.png" Aspect="AspectFill"/>
@@ -15,28 +13,23 @@
                             Fill="#2D2D2D"/>
 
             <VerticalStackLayout Margin="30,0,30,0">
-                <Label 
-                Text="Usuario"
-                VerticalOptions="Center"
-                HorizontalOptions="Center" />
                 <Entry
                     Placeholder="Usuario" 
-                    Text="{Binding Username}"/>
+                    Text="{Binding Username}"
+                    TextColor="White"/>
 
-                <Label
-                Text="Contraseña"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"/>
                 <Entry 
                     IsPassword="True"
                     Placeholder="Contraseña"
-                    Text="{Binding Password}"/>
+                    Text="{Binding Password}"
+                    TextColor="White"/>
 
                 <Button Text="Iniciar Sesión"
                     Command="{Binding LoginYesCommand}"
                     Margin="0,20,0,0"
                     BackgroundColor="Gray"
-                    TextColor="White"/>
+                    TextColor="White"
+                    />
             </VerticalStackLayout>
         </Grid>
     </Grid>

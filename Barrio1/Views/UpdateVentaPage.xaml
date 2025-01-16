@@ -6,15 +6,15 @@
     xmlns:model="clr-namespace:Barrio1.Models"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodel="clr-namespace:Barrio1.ViewModels"
-    Title=""
-    x:DataType="viewmodel:UpdateVentaViewModel">
+    x:DataType="viewmodel:UpdateVentaViewModel"
+    BackgroundColor="#2D2D2D">
     <VerticalStackLayout Margin="20">
         <Grid ColumnDefinitions="100, 115">
             <Grid Grid.Column="0" Grid.Row="0">
-                <Label Text="Pago"/>
+                <Label Text="Pago" TextColor="White"/>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="0">
-                <Picker Title="Metodo de pago" SelectedItem="{Binding Venta.metodo}">
+                <Picker Title="Metodo de pago" TextColor="White" SelectedItem="{Binding Venta.metodo}">
                     <Picker.Items>
                         <x:String>Tarjeta</x:String>
                         <x:String>Transferencia</x:String>
@@ -23,11 +23,11 @@
                 </Picker>
             </Grid>
         </Grid>
-        <Entry Text="{Binding Tmp}"/>
-        <Label Text="Saldo pagado"/>
-        <Label Text="{Binding Venta.pago}"/>
-        <Label Text="Costo de venta"/>
-        <Label Text="{Binding Venta.costo}"/>
+        <Entry Text="{Binding Tmp}" TextColor="White"/>
+        <Label Text="Saldo pagado" TextColor="White"/>
+        <Label Text="{Binding Venta.pago}" TextColor="White"/>
+        <Label Text="Costo de venta" TextColor="White"/>
+        <Label Text="{Binding Venta.costo}" TextColor="White"/>
         <Button
             Background="#4A88DA"
             Command="{Binding UpdateVentaCommand}"

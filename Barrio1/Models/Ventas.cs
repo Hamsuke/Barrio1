@@ -7,7 +7,10 @@ namespace Barrio1.Models;
 
 public class Ventas : BaseModel
 {
-    [PrimaryKey("nota", false)]
+    [PrimaryKey("id", false)]
+    public int identificador { get; set; }
+
+    [Column("nota")]
     public int id { get; set; }
 
     [Column("cliente")]
