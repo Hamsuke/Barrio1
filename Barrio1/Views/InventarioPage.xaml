@@ -7,6 +7,7 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodel="clr-namespace:Barrio1.ViewModels"
     x:DataType="viewmodel:InventarioViewModel"
+    BackgroundColor="#2D2D2D"
     >
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior Command="{Binding GetInventarioCommand}" EventName="Appearing"/>
@@ -36,45 +37,45 @@
                 <ColumnDefinition Width="130" />
             </Grid.ColumnDefinitions>
 
-            <Label Text="" Grid.Column="0" Grid.Row="0" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="Botellas" Grid.Column="1" Grid.Row="0" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="Barriles" Grid.Column="2" Grid.Row="0" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="" Grid.Column="0" Grid.Row="0" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="Botellas" Grid.Column="1" Grid.Row="0" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="Barriles" Grid.Column="2" Grid.Row="0" HorizontalOptions="CenterAndExpand" TextColor="White"/>
 
-            <Label Text="Llanerita" Grid.Column="0" Grid.Row="1" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockLlane}" Grid.Column="1" Grid.Row="1" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockBaLlane}" Grid.Column="2" Grid.Row="1" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Llanerita" Grid.Column="0" Grid.Row="1" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockLlane}" Grid.Column="1" Grid.Row="1" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockBaLlane}" Grid.Column="2" Grid.Row="1" HorizontalOptions="CenterAndExpand" TextColor="White"/>
 
-            <Label Text="Maleficio" Grid.Column="0" Grid.Row="2" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockMale}" Grid.Column="1" Grid.Row="2" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockBaMale}" Grid.Column="2" Grid.Row="2" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Maleficio" Grid.Column="0" Grid.Row="2" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockMale}" Grid.Column="1" Grid.Row="2" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockBaMale}" Grid.Column="2" Grid.Row="2" HorizontalOptions="CenterAndExpand" TextColor="White"/>
 
-            <Label Text="San juanera" Grid.Column="0" Grid.Row="3" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockSJ}" Grid.Column="1" Grid.Row="3" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockBaSJ}" Grid.Column="2" Grid.Row="3" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="San juanera" Grid.Column="0" Grid.Row="3" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockSJ}" Grid.Column="1" Grid.Row="3" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockBaSJ}" Grid.Column="2" Grid.Row="3" HorizontalOptions="CenterAndExpand" TextColor="White"/>
 
-            <Label Text="Barrio 21" Grid.Column="0" Grid.Row="4" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockB21}" Grid.Column="1" Grid.Row="4" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockBaB21}" Grid.Column="2" Grid.Row="4" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Barrio 21" Grid.Column="0" Grid.Row="4" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockB21}" Grid.Column="1" Grid.Row="4" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockBaB21}" Grid.Column="2" Grid.Row="4" HorizontalOptions="CenterAndExpand" TextColor="White"/>
 
-            <Label Text="Barranqueña" Grid.Column="0" Grid.Row="5" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockBarra}" Grid.Column="1" Grid.Row="5" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockBaBarra}" Grid.Column="2" Grid.Row="5" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Barranqueña" Grid.Column="0" Grid.Row="5" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockBarra}" Grid.Column="1" Grid.Row="5" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockBaBarra}" Grid.Column="2" Grid.Row="5" HorizontalOptions="CenterAndExpand" TextColor="White"/>
 
-            <Label Text="Toloachi" Grid.Column="0" Grid.Row="6" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockTolo}" Grid.Column="1" Grid.Row="6" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockBaTolo}" Grid.Column="2" Grid.Row="6" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Toloachi" Grid.Column="0" Grid.Row="6" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockTolo}" Grid.Column="1" Grid.Row="6" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockBaTolo}" Grid.Column="2" Grid.Row="6" HorizontalOptions="CenterAndExpand" TextColor="White"/>
 
-            <Label Text="Genesis" Grid.Column="0" Grid.Row="7" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockGen}" Grid.Column="1" Grid.Row="7" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockBaGen}" Grid.Column="2" Grid.Row="7" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Genesis" Grid.Column="0" Grid.Row="7" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockGen}" Grid.Column="1" Grid.Row="7" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockBaGen}" Grid.Column="2" Grid.Row="7" HorizontalOptions="CenterAndExpand" TextColor="White"/>
 
-            <Label Text="Celi" Grid.Column="0" Grid.Row="8" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockCeli}" Grid.Column="1" Grid.Row="8" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockBaCeli}" Grid.Column="2" Grid.Row="8" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Celi" Grid.Column="0" Grid.Row="8" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockCeli}" Grid.Column="1" Grid.Row="8" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockBaCeli}" Grid.Column="2" Grid.Row="8" HorizontalOptions="CenterAndExpand" TextColor="White"/>
 
-            <Label Text="Guasanta" Grid.Column="0" Grid.Row="9" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockGuasanta}" Grid.Column="1" Grid.Row="9" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="{Binding StockBaGuasanta}" Grid.Column="2" Grid.Row="9" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Guasanta" Grid.Column="0" Grid.Row="9" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockGuasanta}" Grid.Column="1" Grid.Row="9" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <Label Text="{Binding StockBaGuasanta}" Grid.Column="2" Grid.Row="9" HorizontalOptions="CenterAndExpand" TextColor="White"/>
         </Grid>
     </ScrollView>
 </ContentPage>

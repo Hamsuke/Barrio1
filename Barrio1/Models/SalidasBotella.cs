@@ -7,7 +7,10 @@ namespace Barrio1.Models;
 
 public class SalidasBotella : BaseModel
 {
-    [PrimaryKey("nota", false)]
+    [PrimaryKey("id", false)]
+    public int identificador { get; set; }
+
+    [Column("nota")]
     public int id { get; set; }
 
     [Column("llanerita")]
@@ -35,6 +38,6 @@ public class SalidasBotella : BaseModel
     public int guasanta { get; set; }
 
     [Column("celi")]
-    public int celi {  get; set; }
+    public int celi { get; set; }
 
 }

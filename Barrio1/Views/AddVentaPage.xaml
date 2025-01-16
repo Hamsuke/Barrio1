@@ -6,8 +6,8 @@
     xmlns:model="clr-namespace:Barrio1.Models"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodel="clr-namespace:Barrio1.ViewModels"
-    Title="Add Venta"
     x:DataType="viewmodel:AddVentaViewModel"
+    BackgroundColor="#2D2D2D"
     >
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior Command="{Binding GetInventarioCommand}" EventName="Appearing"/>
@@ -17,15 +17,17 @@
         <Grid>
             <Grid Grid.Row="0" Grid.Column="0" HorizontalOptions="Fill">
                 <VerticalStackLayout Margin="20">
-                    <Label Text="Cliente"/>
-                    <Entry Text="{Binding VentaCliente}" />
+                    <Label Text="Cliente" TextColor="White"/>
+                    <Entry Text="{Binding VentaCliente}" TextColor="White" />
+                    <Label Text="Numero de Nota" TextColor="White"/>
+                    <Entry Keyboard="Numeric" TextColor="White" Text="{Binding Nota}"/>
                     <Grid>
-                        <Label Text="Pago (Si no hay dejar en 0)" />
+                        <Label Text="Pago (Si no hay dejar en 0)" TextColor="White"/>
                     </Grid>
                     <Grid>
-                        <Entry Grid.Column="0" HorizontalOptions="Start"  Keyboard="Numeric" Text="{Binding VentaPago}"/>
+                        <Entry Grid.Column="0" HorizontalOptions="Start" TextColor="White" Keyboard="Numeric" Text="{Binding VentaPago}"/>
                         <Picker Grid.Column="1" HorizontalOptions="EndAndExpand"
-                                Title="Metodo de pago" SelectedItem="{Binding Metodo}">
+                                Title="Metodo de pago" TextColor="White" SelectedItem="{Binding Metodo}">
                             <Picker.Items>
                                 <x:String>Tarjeta</x:String>
                                 <x:String>Transferencia</x:String>
@@ -33,130 +35,130 @@
                             </Picker.Items>
                         </Picker>
                     </Grid>
-                    <Label Text="Costo"/>
+                    <Label Text="Valor de venta" TextColor="White"/>
                     <Grid>
-                        <Entry Grid.Column="0" HorizontalOptions="Start" Keyboard="Numeric" Text="{Binding VentaCosto}"/>
+                        <Entry Grid.Column="0" TextColor="White" HorizontalOptions="Start" Keyboard="Numeric" Text="{Binding VentaCosto}"/>
                     </Grid>
-                    <Label HorizontalOptions="Center" Text="Botellas"/>
+                    <Label HorizontalOptions="Center" Text="Botellas" TextColor="White"/>
                     <Grid>
-                        <Label HorizontalOptions="Start" Text="Solicitud"/>
-                        <Label HorizontalOptions="EndAndExpand" Text="Disponible"/>
-                    </Grid>
-                    <Label/>
-
-                    <Label Text="Llanerita"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaLlane}"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockLlane}"/>
-                    </Grid>
-
-                    <Label Text="San Juanera"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaSJ}"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockSJ}"/>
-                    </Grid>
-
-                    <Label Text="Maleficio"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaMale}" />
-                        <Label HorizontalOptions="End" Text="{Binding StockMale}"/>
-                    </Grid>
-
-                    <Label Text="Barranqueña"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBarra}" />
-                        <Label HorizontalOptions="End" Text="{Binding StockBarra}"/>
-                    </Grid>
-
-                    <Label Text="Toloachi"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaTolo}" />
-                        <Label HorizontalOptions="End" Text="{Binding StockTolo}"/>
-                    </Grid>
-
-                    <Label Text="Barrio 21"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaB21}" />
-                        <Label HorizontalOptions="End" Text="{Binding StockB21}"/>
-                    </Grid>
-
-                    <Label Text="Genesis"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaGen}" />
-                        <Label HorizontalOptions="End" Text="{Binding StockGen}"/>
-                    </Grid>
-
-                    <Label Text="Celi"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaCeli}" />
-                        <Label HorizontalOptions="End" Text="{Binding StockCeli}"/>
-                    </Grid>
-
-                    <Label Text="Guasanta"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaGuasanta}" />
-                        <Label HorizontalOptions="End" Text="{Binding StockGuasanta}"/>
-                    </Grid>
-
-                    <Label HorizontalOptions="Center" Text="Barriles"/>
-                    <Grid>
-                        <Label HorizontalOptions="Start" Text="Solicitud"/>
-                        <Label HorizontalOptions="EndAndExpand" Text="Disponible"/>
+                        <Label HorizontalOptions="Start" Text="Solicitud" TextColor="White"/>
+                        <Label HorizontalOptions="EndAndExpand" Text="Disponible" TextColor="White"/>
                     </Grid>
                     <Label/>
 
-                    <Label Text="Llanerita"/>
+                    <Label Text="Llanerita" TextColor="White"/>
                     <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaLlane}"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockBaLlane}"/>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaLlane}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockLlane}" TextColor="White"/>
                     </Grid>
 
-                    <Label Text="San Juanera"/>
+                    <Label Text="San Juanera" TextColor="White"/>
                     <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaSJ}"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockBaSJ}"/>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaSJ}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockSJ}" TextColor="White"/>
                     </Grid>
 
-                    <Label Text="Maleficio"/>
+                    <Label Text="Maleficio" TextColor="White"/>
                     <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaMale}" />
-                        <Label HorizontalOptions="End" Text="{Binding StockBaMale}"/>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaMale}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockMale}" TextColor="White"/>
                     </Grid>
 
-                    <Label Text="Barranqueña"/>
+                    <Label Text="Barranqueña" TextColor="White"/>
                     <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaBarra}" />
-                        <Label HorizontalOptions="End" Text="{Binding StockBaBarra}"/>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBarra}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockBarra}" TextColor="White"/>
                     </Grid>
 
-                    <Label Text="Toloachi"/>
+                    <Label Text="Toloachi" TextColor="White"/>
                     <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaTolo}" />
-                        <Label HorizontalOptions="End" Text="{Binding StockBaTolo}"/>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaTolo}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockTolo}" TextColor="White"/>
                     </Grid>
 
-                    <Label Text="Barrio 21"/>
+                    <Label Text="Barrio 21" TextColor="White"/>
                     <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaB21}" />
-                        <Label HorizontalOptions="End" Text="{Binding StockBaB21}"/>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaB21}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockB21}" TextColor="White"/>
                     </Grid>
 
-                    <Label Text="Genesis"/>
+                    <Label Text="Genesis" TextColor="White"/>
                     <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaGen}" />
-                        <Label HorizontalOptions="End" Text="{Binding StockBaGen}"/>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaGen}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockGen}" TextColor="White"/>
                     </Grid>
 
-                    <Label Text="Celi"/>
+                    <Label Text="Celi" TextColor="White"/>
                     <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaCeli}" />
-                        <Label HorizontalOptions="End" Text="{Binding StockBaCeli}"/>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaCeli}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockCeli}" TextColor="White"/>
                     </Grid>
 
-                    <Label Text="Guasanta"/>
+                    <Label Text="Guasanta" TextColor="White"/>
                     <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaGuasanta}" />
-                        <Label HorizontalOptions="End" Text="{Binding StockBaGuasanta}"/>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaGuasanta}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockGuasanta}" TextColor="White"/>
+                    </Grid>
+
+                    <Label HorizontalOptions="Center" Text="Barriles" TextColor="White"/>
+                    <Grid>
+                        <Label HorizontalOptions="Start" Text="Solicitud" TextColor="White"/>
+                        <Label HorizontalOptions="EndAndExpand" Text="Disponible" TextColor="White"/>
+                    </Grid>
+                    <Label/>
+
+                    <Label Text="Llanerita" TextColor="White"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaLlane}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockBaLlane}" TextColor="White"/>
+                    </Grid>
+
+                    <Label Text="San Juanera" TextColor="White"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaSJ}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockBaSJ}" TextColor="White"/>
+                    </Grid>
+
+                    <Label Text="Maleficio" TextColor="White"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaMale}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockBaMale}" TextColor="White"/>
+                    </Grid>
+
+                    <Label Text="Barranqueña" TextColor="White"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaBarra}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockBaBarra}" TextColor="White"/>
+                    </Grid>
+
+                    <Label Text="Toloachi" TextColor="White"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaTolo}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockBaTolo}" TextColor="White"/>
+                    </Grid>
+
+                    <Label Text="Barrio 21" TextColor="White"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaB21}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockBaB21}" TextColor="White"/>
+                    </Grid>
+
+                    <Label Text="Genesis" TextColor="White"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaGen}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockBaGen}" TextColor="White"/>
+                    </Grid>
+
+                    <Label Text="Celi" TextColor="White"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaCeli}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockBaCeli}" TextColor="White"/>
+                    </Grid>
+
+                    <Label Text="Guasanta" TextColor="White"/>
+                    <Grid>
+                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaGuasanta}" TextColor="White"/>
+                        <Label HorizontalOptions="End" Text="{Binding StockBaGuasanta}" TextColor="White"/>
                     </Grid>
 
                     <Button

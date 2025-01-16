@@ -128,31 +128,24 @@ public class DataServices : IDataServices
     {
         try
         {
-            SalidasBotella response = await _supabaseClient
+            // Fetch a single record or null if no match
+            var response = await _supabaseClient
                 .From<SalidasBotella>()
-                .Select(x => new object[]
-                {
-                    x.id,
-                    x.llane,
-                    x.male,
-                    x.sj,
-                    x.barra,
-                    x.tolo,
-                    x.b21,
-                    x.gen,
-                    x.guasanta,
-                    x.celi
-                })
                 .Where(x => x.id == num)
                 .Single();
+
+            if (response == null)
+            {
+                Console.WriteLine($"No data found for id {num}.");
+            }
 
             return response;
         }
         catch (Exception ex)
         {
-            // Maneja la excepción (puedes registrar el error o manejarlo de otra manera)
-            Console.WriteLine($"Error: {ex.Message}");
-            return null; // O lanza una excepción personalizada o un valor por defecto
+            // Log the exception (use a logger in production)
+            Console.WriteLine($"Error fetching Botellas: {ex.Message}");
+            return null;
         }
     }
 
@@ -160,32 +153,90 @@ public class DataServices : IDataServices
     {
         try
         {
-            SalidasBarril response = await _supabaseClient
+            // Fetch a single record or null if no match
+            var response = await _supabaseClient
                 .From<SalidasBarril>()
-                .Select(x => new object[]
-                {
-                    x.id,
-                    x.llane,
-                    x.male,
-                    x.sj,
-                    x.barra,
-                    x.tolo,
-                    x.b21,
-                    x.gen,
-                    x.guasanta,
-                    x.celi
-                })
                 .Where(x => x.id == num)
                 .Single();
+
+            if (response == null)
+            {
+                Console.WriteLine($"No data found for id {num}.");
+            }
 
             return response;
         }
         catch (Exception ex)
         {
-            // Maneja la excepción (puedes registrar el error o manejarlo de otra manera)
-            Console.WriteLine($"Error: {ex.Message}");
-            return null; // O lanza una excepción personalizada o un valor por defecto
+            // Log the exception (use a logger in production)
+            Console.WriteLine($"Error fetching Barriles: {ex.Message}");
+            return null;
         }
     }
+
+
+    //public async Task<SalidasBotella> GetBotellasNota(int num)
+    //{
+    //    try
+    //    {
+    //        SalidasBotella response = await _supabaseClient
+    //            .From<SalidasBotella>()
+    //            .Select(x => new object[]
+    //            {
+    //                x.id,
+    //                x.llane,
+    //                x.male,
+    //                x.sj,
+    //                x.barra,
+    //                x.tolo,
+    //                x.b21,
+    //                x.gen,
+    //                x.guasanta,
+    //                x.celi
+    //            })
+    //            .Where(x => x.id == num)
+    //            .Single();
+
+    //        return response;
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        // Maneja la excepción (puedes registrar el error o manejarlo de otra manera)
+    //        Console.WriteLine($"Error: {ex.Message}");
+    //        return null; // O lanza una excepción personalizada o un valor por defecto
+    //    }
+    //}
+
+    //public async Task<SalidasBarril> GetBarrilesNota(int num)
+    //{
+    //    try
+    //    {
+    //        SalidasBarril response = await _supabaseClient
+    //            .From<SalidasBarril>()
+    //            .Select(x => new object[]
+    //            {
+    //                x.id,
+    //                x.llane,
+    //                x.male,
+    //                x.sj,
+    //                x.barra,
+    //                x.tolo,
+    //                x.b21,
+    //                x.gen,
+    //                x.guasanta,
+    //                x.celi
+    //            })
+    //            .Where(x => x.id == num)
+    //            .Single();
+
+    //        return response;
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        // Maneja la excepción (puedes registrar el error o manejarlo de otra manera)
+    //        Console.WriteLine($"Error: {ex.Message}");
+    //        return null; // O lanza una excepción personalizada o un valor por defecto
+    //    }
+    //}
 
 }

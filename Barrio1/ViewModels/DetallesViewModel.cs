@@ -2,7 +2,6 @@
 using Barrio1.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
 
 
 namespace Barrio1.ViewModels;
@@ -64,10 +63,21 @@ public partial class DetallesViewModel : ObservableObject
     [RelayCommand]
     public async Task SalidaBo()
     {
-        SalidasBotella botellas = new SalidasBotella();
+        if (Venta == null)
+        {
+            Console.WriteLine("Venta is not set. Exiting command.");
+            return;
+        }
 
-        botellas = await _dataServices.GetBotellasNota(Venta.id);
+        var botellas = await _dataServices.GetBotellasNota(Venta.id);
+        if (botellas == null)
+        {
+            Console.WriteLine("No botellas data found for the given Venta ID.");
+            // Optional: Notify the user via a UI message
+            return;
+        }
 
+        // Safely update properties after null check
         StockLlane = botellas.llane;
         StockSJ = botellas.sj;
         StockMale = botellas.male;
@@ -78,6 +88,7 @@ public partial class DetallesViewModel : ObservableObject
         StockGuasanta = botellas.guasanta;
         StockCeli = botellas.celi;
     }
+
 
     [RelayCommand]
     public async Task SalidaBa()

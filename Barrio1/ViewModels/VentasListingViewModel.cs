@@ -11,23 +11,52 @@ public partial class VentasListingViewModel : ObservableObject
     private readonly IDataServices _dataService;
 
     public ObservableCollection<Ventas> Ventas { get; set; } = new();
+
+    private List<Ventas> _ventasOriginal = new();
+
+    public List<string> Meses { get; } = new List<string>
+    {
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    };
+
+    public List<int> Anos { get; } = Enumerable.Range(2024, DateTime.Now.Year - 2024 + 1).ToList();
+
+    [ObservableProperty]
+    private string _mesSeleccionado;
+
+    [ObservableProperty]
+    private int _anoSeleccionado = DateTime.Now.Year;
+
     public VentasListingViewModel(IDataServices dataService)
     {
         _dataService = dataService;
+        _mesSeleccionado = Meses[DateTime.Now.Month - 1];
     }
 
     [RelayCommand]
     public async Task GetVentas()
     {
         Ventas.Clear();
+        _ventasOriginal.Clear();
 
         try
         {
+            // Obtener todas las ventas
             var ventas = await _dataService.GetVentas();
 
             if (ventas.Any())
             {
-                foreach (var venta in ventas)
+                // Filtrar las ventas del mes actual
+                var mesActual = 1;
+                var anoActual = 2025;
+
+                var ventasDelMes = ventas.Where(v => v.dateC.Month == mesActual && v.dateC.Year == anoActual).ToList();
+
+                // Guardar lista original (para filtros posteriores) y agregar al observable
+                _ventasOriginal.AddRange(ventasDelMes);
+
+                foreach (var venta in ventasDelMes)
                 {
                     Ventas.Add(venta);
                 }
@@ -36,6 +65,59 @@ public partial class VentasListingViewModel : ObservableObject
         catch (Exception ex)
         {
             await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+        }
+    }
+
+
+    //[RelayCommand]
+    //public async Task GetVentas()
+    //{
+    //    Ventas.Clear();
+    //    _ventasOriginal.Clear();
+
+    //    try
+    //    {
+    //        var ventas = await _dataService.GetVentas();
+
+    //        if (ventas.Any())
+    //        {
+    //            _ventasOriginal.AddRange(ventas); // Guardar lista original
+
+    //            foreach (var venta in ventas)
+    //            {
+    //                Ventas.Add(venta);
+    //            }
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+    //    }
+    //}
+
+    [RelayCommand]
+    public void FiltrarVentas()
+    {
+        // Validar que se haya seleccionado un mes y un año
+        if (string.IsNullOrWhiteSpace(MesSeleccionado) || AnoSeleccionado == 0)
+        {
+            Shell.Current.DisplayAlert("Error", "Por favor selecciona un mes y un año.", "OK");
+            return;
+        }
+
+        // Obtener el número del mes seleccionado
+        int mes = Meses.IndexOf(MesSeleccionado) + 1;
+
+        // Filtrar ventas por mes y año
+        var ventasFiltradas = _ventasOriginal
+            .Where(v => v.dateC.Month == mes && v.dateC.Year == AnoSeleccionado)
+            .ToList();
+
+        // Limpiar y actualizar la lista visible
+        Ventas.Clear();
+        foreach (var venta in ventasFiltradas)
+        {
+            Ventas.Add(venta);
         }
     }
 
