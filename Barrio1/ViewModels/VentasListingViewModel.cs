@@ -48,8 +48,8 @@ public partial class VentasListingViewModel : ObservableObject
             if (ventas.Any())
             {
                 // Filtrar las ventas del mes actual
-                var mesActual = 1;
-                var anoActual = 2025;
+                var mesActual = DateTime.Now.Month;
+                var anoActual = DateTime.Now.Year;
 
                 var ventasDelMes = ventas.Where(v => v.dateC.Month == mesActual && v.dateC.Year == anoActual).ToList();
 
@@ -68,42 +68,9 @@ public partial class VentasListingViewModel : ObservableObject
         }
     }
 
-
-    //[RelayCommand]
-    //public async Task GetVentas()
-    //{
-    //    Ventas.Clear();
-    //    _ventasOriginal.Clear();
-
-    //    try
-    //    {
-    //        var ventas = await _dataService.GetVentas();
-
-    //        if (ventas.Any())
-    //        {
-    //            _ventasOriginal.AddRange(ventas); // Guardar lista original
-
-    //            foreach (var venta in ventas)
-    //            {
-    //                Ventas.Add(venta);
-    //            }
-    //        }
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
-    //    }
-    //}
-
     [RelayCommand]
     public void FiltrarVentas()
     {
-        // Validar que se haya seleccionado un mes y un año
-        if (string.IsNullOrWhiteSpace(MesSeleccionado) || AnoSeleccionado == 0)
-        {
-            Shell.Current.DisplayAlert("Error", "Por favor selecciona un mes y un año.", "OK");
-            return;
-        }
 
         // Obtener el número del mes seleccionado
         int mes = Meses.IndexOf(MesSeleccionado) + 1;
