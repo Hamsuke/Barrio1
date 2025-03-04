@@ -4,17 +4,21 @@ namespace Barrio1.Services
 {
     public interface IDataServices
     {
-        Task<IEnumerable<Ventas>> GetVentas();
+        Task<IEnumerable<Ventas>> GetVentas(DateTime inicioDeMes, DateTime diaActual);
         Task CreateVenta(Ventas venta);
-        Task CreateSalida(SalidasBotella salidaBo, SalidasBarril salidaBa);
+        Task CreateSalidaBotella(SalidasBotella salida);
+        Task CreateSalidaBarril(SalidasBarril salida);
         Task UpdateVenta(Ventas venta);
         Task<bool> Login(Users u);
-        Task UpdateAlmacen(Botellas ajustes, Barriles ajustesBa);
-        Task<Botellas> GetInventario();
-        Task<Barriles> GetBarriles();
-        Task<SalidasBotella> GetBotellasNota(int num);
-        Task<SalidasBarril> GetBarrilesNota(int num);
+        Task<IEnumerable<Botellas>> GetBotellas();
+        Task<IEnumerable<Botellas>> GetBotellasDisp();
+        Task<IEnumerable<Barriles>> GetBarriles();
+        Task<IEnumerable<Barriles>> GetBarrilesDisp();
+        Task<IEnumerable<SalidasBotella>> GetBotellasNota(int num);
+        Task<IEnumerable<SalidasBarril>> GetBarrilesNota(int num);
         void SetUsername(string US);
         string GetUsername();
+        public Task updateBotella(SalidasBotella salida);
+        public Task updateBarril(SalidasBarril salida);
     }
 }

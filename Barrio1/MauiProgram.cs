@@ -32,7 +32,11 @@ namespace Barrio1
             //Supabase
             var url = AppConfig.supaUrl;
             var key = AppConfig.supaKey;
-            builder.Services.AddSingleton(provider => new Supabase.Client(url, key));
+            var options = new Supabase.SupabaseOptions
+            {
+                Schema = "barriochico"
+            };
+            builder.Services.AddSingleton(provider => new Supabase.Client(url, key, options));
 
             // Add ViewModels
             builder.Services.AddSingleton<InventarioViewModel>();

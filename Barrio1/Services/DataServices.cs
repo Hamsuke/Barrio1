@@ -13,24 +13,23 @@ public class DataServices : IDataServices
     {
         _supabaseClient = supabaseClient;
     }
-
-    public async Task<IEnumerable<Ventas>> GetVentas()
+    public async Task<IEnumerable<Ventas>> GetVentas(DateTime inicioDeMes, DateTime diaActual)
     {
-        var response = await _supabaseClient.From<Ventas>().Get();
+        var response = await _supabaseClient.From<Ventas>().Where(v => v.dateC >= inicioDeMes && v.dateC <= diaActual).Get();
         return response.Models.OrderByDescending(b => b.id);
     }
-
     public async Task CreateVenta(Ventas venta)
     {
         await _supabaseClient.From<Ventas>().Insert(venta);
     }
-
-    public async Task CreateSalida(SalidasBotella salidasBo, SalidasBarril salidasBa)
+    public async Task CreateSalidaBotella(SalidasBotella salida)
     {
-        await _supabaseClient.From<SalidasBotella>().Insert(salidasBo);
-        await _supabaseClient.From<SalidasBarril>().Insert(salidasBa);
+        await _supabaseClient.From<SalidasBotella>().Insert(salida);
     }
-
+    public async Task CreateSalidaBarril(SalidasBarril salida)
+    {
+        await _supabaseClient.From<SalidasBarril>().Insert(salida);
+    }
     public async Task UpdateVenta(Ventas venta)
     {
         var tmp = await _supabaseClient.From<Ventas>()
@@ -55,7 +54,28 @@ public class DataServices : IDataServices
             .Set(b => b.costo, venta.costo)
             .Update();
     }
-
+    public async Task updateBotella(SalidasBotella salida)
+    {
+        var tmp = await _supabaseClient.From<Botellas>()
+            .Where(b => b.nombreBo == salida.botella)
+            .Single();
+        tmp.cantidadBo = tmp.cantidadBo - salida.cant;
+        await _supabaseClient.From<Botellas>()
+            .Where(b => b.nombreBo == tmp.nombreBo)
+            .Set(b => b.cantidadBo, tmp.cantidadBo)
+            .Update();
+    }
+    public async Task updateBarril(SalidasBarril salida)
+    {
+        var tmp = await _supabaseClient.From<Barriles>()
+    .Where(b => b.nombreBa == salida.barril)
+    .Single();
+        tmp.cantidadBa = tmp.cantidadBa - salida.cant;
+        await _supabaseClient.From<Barriles>()
+            .Where(b => b.nombreBa == tmp.nombreBa)
+            .Set(b => b.cantidadBa, tmp.cantidadBa)
+            .Update();
+    }
     public async Task<bool> Login(Users u)
     {
         Users tmp = await _supabaseClient.From<Users>()
@@ -69,61 +89,35 @@ public class DataServices : IDataServices
             return false;
         }
     }
-
-    public async Task UpdateAlmacen(Botellas ajustes, Barriles ajustesBa)
-    {
-        ajustes.id = 1;
-        await _supabaseClient.From<Botellas>()
-            .Where(b => b.id == ajustes.id)
-            .Set(b => b.llane, ajustes.llane)
-            .Set(b => b.SJ, ajustes.SJ)
-            .Set(b => b.male, ajustes.male)
-            .Set(b => b.barra, ajustes.barra)
-            .Set(b => b.tolo, ajustes.tolo)
-            .Set(b => b.b21, ajustes.b21)
-            .Set(b => b.gen, ajustes.gen)
-            .Set(b => b.guasanta, ajustes.guasanta)
-            .Set(b => b.celi, ajustes.celi)
-            .Update();
-
-        ajustesBa.id = 1;
-        await _supabaseClient.From<Barriles>()
-            .Where(b => b.id == ajustesBa.id)
-            .Set(b => b.llane, ajustesBa.llane)
-            .Set(b => b.SJ, ajustesBa.SJ)
-            .Set(b => b.male, ajustesBa.male)
-            .Set(b => b.barra, ajustesBa.barra)
-            .Set(b => b.tolo, ajustesBa.tolo)
-            .Set(b => b.b21, ajustesBa.b21)
-            .Set(b => b.gen, ajustesBa.gen)
-            .Set(b => b.guasanta, ajustesBa.guasanta)
-            .Set(b => b.celi, ajustesBa.celi)
-            .Update();
-    }
-
-    public async Task<Botellas> GetInventario()
+    public async Task<IEnumerable<Botellas>> GetBotellas()
     {
         var response = await _supabaseClient.From<Botellas>().Get();
-        return response.Models.FirstOrDefault();
+        return response.Models.OrderByDescending(b => b.id);
     }
-
-    public async Task<Barriles> GetBarriles()
+    public async Task<IEnumerable<Botellas>> GetBotellasDisp()
+    {
+        var response = await _supabaseClient.From<Botellas>().Get();
+        return response.Models.OrderByDescending(b => b.id);
+    }
+    public async Task<IEnumerable<Barriles>> GetBarriles()
     {
         var response = await _supabaseClient.From<Barriles>().Get();
-        return response.Models.FirstOrDefault();
+        return response.Models.OrderByDescending(b => b.id);
     }
-
+    public async Task<IEnumerable<Barriles>> GetBarrilesDisp()
+    {
+        var response = await _supabaseClient.From<Barriles>().Get();
+        return response.Models;
+    }
     public void SetUsername(string US)
     {
         _user = US;
     }
-
     public string GetUsername()
     {
         return _user;
     }
-
-    public async Task<SalidasBotella> GetBotellasNota(int num)
+    public async Task<IEnumerable<SalidasBotella>> GetBotellasNota(int num)
     {
         try
         {
@@ -131,14 +125,14 @@ public class DataServices : IDataServices
             var response = await _supabaseClient
                 .From<SalidasBotella>()
                 .Where(x => x.id == num)
-                .Single();
+                .Get();
 
             if (response == null)
             {
                 Console.WriteLine($"No data found for id {num}.");
             }
 
-            return response;
+            return response.Models;
         }
         catch (Exception ex)
         {
@@ -147,8 +141,7 @@ public class DataServices : IDataServices
             return null;
         }
     }
-
-    public async Task<SalidasBarril> GetBarrilesNota(int num)
+    public async Task<IEnumerable<SalidasBarril>> GetBarrilesNota(int num)
     {
         try
         {
@@ -156,14 +149,14 @@ public class DataServices : IDataServices
             var response = await _supabaseClient
                 .From<SalidasBarril>()
                 .Where(x => x.id == num)
-                .Single();
+                .Get();
 
             if (response == null)
             {
                 Console.WriteLine($"No data found for id {num}.");
             }
 
-            return response;
+            return response.Models;
         }
         catch (Exception ex)
         {
@@ -172,5 +165,4 @@ public class DataServices : IDataServices
             return null;
         }
     }
-
 }
