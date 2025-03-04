@@ -1,4 +1,5 @@
-﻿using Barrio1.Models;
+﻿using System.Collections.ObjectModel;
+using Barrio1.Models;
 using Barrio1.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -12,48 +13,15 @@ public partial class DetallesViewModel : ObservableObject
 {
     private readonly IDataServices _dataServices;
 
-    //InventarioBotellas
-    [ObservableProperty]
-    private int _stockLlane;
-    [ObservableProperty]
-    private int _stockSJ;
-    [ObservableProperty]
-    private int _stockMale;
-    [ObservableProperty]
-    private int _stockBarra;
-    [ObservableProperty]
-    private int _stockTolo;
-    [ObservableProperty]
-    private int _stockB21;
-    [ObservableProperty]
-    private int _stockGen;
-    [ObservableProperty]
-    private int _stockGuasanta;
-    [ObservableProperty]
-    private int _stockCeli;
-
-    //InventarioBotellas
-    [ObservableProperty]
-    private int _stockBaLlane;
-    [ObservableProperty]
-    private int _stockBaSJ;
-    [ObservableProperty]
-    private int _stockBaMale;
-    [ObservableProperty]
-    private int _stockBaBarra;
-    [ObservableProperty]
-    private int _stockBaTolo;
-    [ObservableProperty]
-    private int _stockBaB21;
-    [ObservableProperty]
-    private int _stockBaGen;
-    [ObservableProperty]
-    private int _stockBaGuasanta;
-    [ObservableProperty]
-    private int _stockBaCeli;
+    public ObservableCollection<SalidasBotella> SalidasBotella { get; set; } = new();
+    public ObservableCollection<SalidasBarril> SalidasBarril { get; set; } = new();
 
     [ObservableProperty]
     private Ventas _venta;
+    [ObservableProperty]
+    private DateOnly _fecha1;
+    [ObservableProperty]
+    private DateOnly _fecha2;
 
     public DetallesViewModel(IDataServices dataService)
     {
@@ -61,51 +29,69 @@ public partial class DetallesViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public async Task SalidaBo()
+    public async Task GetNota()
     {
+        Fecha1 = new DateOnly(Venta.dateC.Year, Venta.dateC.Month, Venta.dateC.Day);
+        Fecha2 = new DateOnly(Venta.dateP.Year, Venta.dateP.Month, Venta.dateP.Day);
+        SalidasBarril.Clear();
+        SalidasBotella.Clear();
+
         if (Venta == null)
         {
             Console.WriteLine("Venta is not set. Exiting command.");
             return;
         }
 
-        var botellas = await _dataServices.GetBotellasNota(Venta.id);
-        if (botellas == null)
+        try
         {
-            Console.WriteLine("No botellas data found for the given Venta ID.");
-            // Optional: Notify the user via a UI message
-            return;
+            // Get Botellas data
+            var botellas = await _dataServices.GetBotellasNota(Venta.id);
+            if (botellas == null || !botellas.Any())
+            {
+                Console.WriteLine("No botellas data found for the given Venta ID.");
+            }
+            else
+            {
+                var lista = botellas.ToList();
+                // Add Botellas to the collection
+                foreach (var item in lista)
+                {
+                    SalidasBotella.Add(item);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error retrieving botellas data: {ex.Message}");
+            // Optional: Log the exception or notify the user about the failure
         }
 
-        // Safely update properties after null check
-        StockLlane = botellas.llane;
-        StockSJ = botellas.sj;
-        StockMale = botellas.male;
-        StockBarra = botellas.barra;
-        StockTolo = botellas.tolo;
-        StockB21 = botellas.b21;
-        StockGen = botellas.gen;
-        StockGuasanta = botellas.guasanta;
-        StockCeli = botellas.celi;
+        try
+        {
+            // Get Barriles data
+            var barriles = await _dataServices.GetBarrilesNota(Venta.id);
+            if (barriles == null || !barriles.Any())
+            {
+                Console.WriteLine("No barriles data found for the given Venta ID.");
+            }
+            else
+            {
+                var lista = barriles.ToList();
+                // Add Barriles to the collection
+                foreach (var item in lista)
+                {
+                    SalidasBarril.Add(item);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error retrieving barriles data: {ex.Message}");
+            // Optional: Log the exception or notify the user about the failure
+        }
+
+        // Safely update properties after null check (if needed)
     }
 
-
-    [RelayCommand]
-    public async Task SalidaBa()
-    {
-        SalidasBarril barriles = new SalidasBarril();
-
-        barriles = await _dataServices.GetBarrilesNota(Venta.id);
-
-        StockBaLlane = barriles.llane;
-        StockBaSJ = barriles.sj;
-        StockBaMale = barriles.male;
-        StockBaBarra = barriles.barra;
-        StockBaTolo = barriles.tolo;
-        StockBaB21 = barriles.b21;
-        StockBaGen = barriles.gen;
-        StockBaGuasanta = barriles.guasanta;
-        StockBaCeli = barriles.celi;
-    }
 }
 

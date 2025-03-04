@@ -15,103 +15,93 @@
             FalseObject="Pago pendiente"
             TrueObject="Pago Completo" />
     </ContentPage.Resources>
+
     <ContentPage.Behaviors>
-        <toolkit:EventToCommandBehavior Command="{Binding SalidaBaCommand}" EventName="Appearing"/>
-        <toolkit:EventToCommandBehavior Command="{Binding SalidaBoCommand}" EventName="Appearing"/>
+        <toolkit:EventToCommandBehavior Command="{Binding GetNotaCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
 
-    <VerticalStackLayout Margin="5">
-        <Grid Padding="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="110" />
-                <ColumnDefinition Width="140" />
-                <ColumnDefinition Width="140" />
-            </Grid.ColumnDefinitions>
+    <StackLayout>
+        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto" RowSpacing="6" ColumnSpacing="6">
 
-            <Label Text="Vendedor" Grid.Column="0" Grid.Row="0" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding Venta.vendor}" Grid.Column="0" Grid.Row="1" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <StackLayout Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
+                <Frame>
+                    <Grid RowDefinitions="auto,auto,auto,auto,auto" ColumnDefinitions="*,*,*,*" ColumnSpacing="20">
+                        <Label Text="Nota" TextColor="Black" Grid.ColumnSpan="4" FontSize="Title" HorizontalOptions="Center" Grid.Row="0" Grid.Column="0"/>
 
-            <Label Text="Cliente" Grid.Column="1" Grid.Row="0" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding Venta.name}" Grid.Column="1" Grid.Row="1" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+                        <Label Grid.Column="0" Grid.Row="1" Text="Vendedor:" TextColor="Black"/>
+                        <Label Grid.Column="0" Grid.Row="2" Text="Cliente:" TextColor="Black"/>
+                        <Label Grid.Column="0" Grid.Row="3" Text="Numero:" TextColor="Black"/>
 
-            <Label Text="Nota numero" Grid.Column="2" Grid.Row="0" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding Venta.id}" Grid.Column="2" Grid.Row="1" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Venta.vendor}" TextColor="Black"/>
+                        <Label Grid.Column="1" Grid.Row="2" Text="{Binding Venta.name}" TextColor="Black"/>
+                        <Label Grid.Column="1" Grid.Row="3" Text="{Binding Venta.id}" TextColor="Black"/>
 
-            <Label Text="" Grid.Column="0" Grid.Row="2" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="Botellas" Grid.Column="1" Grid.Row="2" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="Barriles" Grid.Column="2" Grid.Row="2" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+                        <Label Grid.Column="2" Grid.Row="1" Text="Cantidad a pagar:" TextColor="Black"/>
+                        <Label Grid.Column="2" Grid.Row="2" Text="Cantidad pagada:" TextColor="Black"/>
+                        <Label Grid.Column="2" Grid.Row="3" Text="Estado de nota:" TextColor="Black"/>
+                        <Label Grid.Column="2" Grid.Row="4" Text="Metodo de pago:" TextColor="Black"/>
 
-            <Label Text="Llanerita" Grid.Column="0" Grid.Row="3" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockLlane}" Grid.Column="1" Grid.Row="3" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockBaLlane}" Grid.Column="2" Grid.Row="3" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+                        <Label Grid.Column="3" Grid.Row="1" Text="{Binding Venta.costo}" TextColor="Black"/>
+                        <Label Grid.Column="3" Grid.Row="2" Text="{Binding Venta.pago}" TextColor="Black"/>
+                        <Label Grid.Column="3" Grid.Row="3" Text="{Binding Venta.est}" TextColor="Black"/>
+                        <Label Grid.Column="3" Grid.Row="4" Text="{Binding Venta.metodo}" TextColor="Black"/>
 
-            <Label Text="Maleficio" Grid.Column="0" Grid.Row="4" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockMale}" Grid.Column="1" Grid.Row="4" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockBaMale}" Grid.Column="2" Grid.Row="4" HorizontalOptions="CenterAndExpand" TextColor="White"/>
 
-            <Label Text="San juanera" Grid.Column="0" Grid.Row="5" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockSJ}" Grid.Column="1" Grid.Row="5" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockBaSJ}" Grid.Column="2" Grid.Row="5" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+                    </Grid>
+                </Frame>
+            </StackLayout>
 
-            <Label Text="Barrio 21" Grid.Column="0" Grid.Row="6" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockB21}" Grid.Column="1" Grid.Row="6" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockBaB21}" Grid.Column="2" Grid.Row="6" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <!-- CollectionView for SalidasBotella -->
+            <StackLayout Grid.Row="1" Grid.Column="0">
+                <!-- Frame to wrap the CollectionView -->
+                <Frame Padding="10" BorderColor="Black">
+                    <StackLayout>
+                        <!-- Label for "Botellas" -->
+                        <Label Text="Botellas" TextColor="Black" FontSize="Medium" HorizontalOptions="Center" Margin="0,0,0,10"/>
 
-            <Label Text="Barranqueña" Grid.Column="0" Grid.Row="7" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockBarra}" Grid.Column="1" Grid.Row="7" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockBaBarra}" Grid.Column="2" Grid.Row="7" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+                        <!-- CollectionView for SalidasBotella -->
+                        <CollectionView ItemsSource="{Binding SalidasBotella}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="model:SalidasBotella">
+                                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                                        <!-- Botella Label -->
+                                        <Label Grid.Row="1" Grid.Column="0" TextColor="Black" Text="{Binding botella}"/>
 
-            <Label Text="Toloachi" Grid.Column="0" Grid.Row="8" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockTolo}" Grid.Column="1" Grid.Row="8" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockBaTolo}" Grid.Column="2" Grid.Row="8" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+                                        <!-- Cantidad Label -->
+                                        <Label Grid.Row="1" Grid.Column="1" TextColor="Black" Text="{Binding cant}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
 
-            <Label Text="Genesis" Grid.Column="0" Grid.Row="9" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockGen}" Grid.Column="1" Grid.Row="9" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockBaGen}" Grid.Column="2" Grid.Row="9" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            <!-- CollectionView for SalidasBotella -->
+            <StackLayout Grid.Row="1" Grid.Column="1">
+                <!-- Frame to wrap the CollectionView -->
+                <Frame Padding="10" BorderColor="Black">
+                    <StackLayout>
+                        <!-- Label for "Botellas" -->
+                        <Label Text="Barriles" TextColor="Black" FontSize="Medium" HorizontalOptions="Center" Margin="0,0,0,10"/>
 
-            <Label Text="Celi" Grid.Column="0" Grid.Row="10" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockCeli}" Grid.Column="1" Grid.Row="10" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockBaCeli}" Grid.Column="2" Grid.Row="10" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+                        <!-- CollectionView for SalidasBotella -->
+                        <CollectionView ItemsSource="{Binding SalidasBarril}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="model:SalidasBarril">
+                                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                                        <!-- Botella Label -->
+                                        <Label Grid.Row="1" Grid.Column="0" TextColor="Black" Text="{Binding barril}"/>
 
-            <Label Text="Guasanta" Grid.Column="0" Grid.Row="11" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockGuasanta}" Grid.Column="1" Grid.Row="11" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding StockBaGuasanta}" Grid.Column="2" Grid.Row="11" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-
-            <Label Text="Saldo pagado" Grid.Row="12" Grid.Column="0" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding Venta.pago}" Grid.Row="13" Grid.Column="0" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="Costo de venta" Grid.Row="12" Grid.Column="1" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding Venta.costo}" Grid.Row="13" Grid.Column="1" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="Forma de pago" Grid.Row="12" Grid.Column="2" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding Venta.metodo}" Grid.Row="13" Grid.Column="2" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-
-            <Label Text="Fecha de entrega" Grid.Row="14" Grid.Column="0" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding Venta.dateC}" Grid.Row="15" Grid.Column="0" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="Fecha de Pago" Grid.Row="14" Grid.Column="2" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding Venta.dateP}" Grid.Row="15" Grid.Column="2" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-
-            <Label Text="Estado" Grid.Column="1" Grid.Row="14" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label Text="{Binding Venta.est, Converter={StaticResource BoolToObjectConverter}}" 
-                    Grid.Column="1" Grid.Row="15" HorizontalOptions="CenterAndExpand"
-                    LineBreakMode="TailTruncation" TextColor="White"/>
-
+                                        <!-- Cantidad Label -->
+                                        <Label Grid.Row="1" Grid.Column="1" TextColor="Black" Text="{Binding cant}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
         </Grid>
-    </VerticalStackLayout>
+    </StackLayout>
 </ContentPage>

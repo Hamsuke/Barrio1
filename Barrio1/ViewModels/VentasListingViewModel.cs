@@ -11,50 +11,37 @@ public partial class VentasListingViewModel : ObservableObject
     private readonly IDataServices _dataService;
 
     public ObservableCollection<Ventas> Ventas { get; set; } = new();
-
-    private List<Ventas> _ventasOriginal = new();
-
-    public List<string> Meses { get; } = new List<string>
-    {
-        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-    };
-
-    public List<int> Anos { get; } = Enumerable.Range(2024, DateTime.Now.Year - 2024 + 1).ToList();
+    public DateTime MinDate { get; set; }
+    public DateTime MaxDate { get; set; }
+    public DateTime inicioMes { get; set; }
 
     [ObservableProperty]
-    private string _mesSeleccionado;
-
-    [ObservableProperty]
-    private int _anoSeleccionado = DateTime.Now.Year;
+    private DateTime _selectedDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
 
     public VentasListingViewModel(IDataServices dataService)
     {
         _dataService = dataService;
-        _mesSeleccionado = Meses[DateTime.Now.Month - 1];
+        MinDate = new DateTime(2024, 12, 01);
+        MaxDate = DateTime.Now;
+        inicioMes = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+
     }
 
     [RelayCommand]
     public async Task GetVentas()
     {
         Ventas.Clear();
-        _ventasOriginal.Clear();
-
         try
         {
-            // Obtener todas las ventas
-            var ventas = await _dataService.GetVentas();
+            // Obtener todas las ventas del mes
+            var ventas = await _dataService.GetVentas(inicioMes, SelectedDate);
 
             if (ventas.Any())
             {
                 // Filtrar las ventas del mes actual
-                var mesActual = DateTime.Now.Month;
-                var anoActual = DateTime.Now.Year;
 
-                var ventasDelMes = ventas.Where(v => v.dateC.Month == mesActual && v.dateC.Year == anoActual).ToList();
 
-                // Guardar lista original (para filtros posteriores) y agregar al observable
-                _ventasOriginal.AddRange(ventasDelMes);
+                var ventasDelMes = ventas.ToList();
 
                 foreach (var venta in ventasDelMes)
                 {
@@ -69,20 +56,16 @@ public partial class VentasListingViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public void FiltrarVentas()
+    public async Task FiltrarVentasAsync()
     {
-
-        // Obtener el número del mes seleccionado
-        int mes = Meses.IndexOf(MesSeleccionado) + 1;
+        DateTime inicioDeMes = new DateTime(SelectedDate.Year, SelectedDate.Month, 1);
 
         // Filtrar ventas por mes y año
-        var ventasFiltradas = _ventasOriginal
-            .Where(v => v.dateC.Month == mes && v.dateC.Year == AnoSeleccionado)
-            .ToList();
+        var ventas = await _dataService.GetVentas(inicioDeMes, SelectedDate);
 
         // Limpiar y actualizar la lista visible
         Ventas.Clear();
-        foreach (var venta in ventasFiltradas)
+        foreach (var venta in ventas)
         {
             Ventas.Add(venta);
         }

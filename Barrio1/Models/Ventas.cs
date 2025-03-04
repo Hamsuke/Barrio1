@@ -37,4 +37,5 @@ public class Ventas : BaseModel
 
     [Column("metodo")]
     public string metodo { get; set; }
+
 }

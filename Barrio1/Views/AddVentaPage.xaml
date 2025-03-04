@@ -10,9 +10,10 @@
     BackgroundColor="#2D2D2D"
     >
     <ContentPage.Behaviors>
-        <toolkit:EventToCommandBehavior Command="{Binding GetInventarioCommand}" EventName="Appearing"/>
-        <toolkit:EventToCommandBehavior Command="{Binding GetBarrilesCommand}" EventName="Appearing"/>
+        <toolkit:EventToCommandBehavior Command="{Binding getBarrilesCommand}" EventName="Appearing" />
+        <toolkit:EventToCommandBehavior Command="{Binding getBotellasCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
+
     <ScrollView>
         <Grid>
             <Grid Grid.Row="0" Grid.Column="0" HorizontalOptions="Fill">
@@ -39,126 +40,70 @@
                     <Grid>
                         <Entry Grid.Column="0" TextColor="White" HorizontalOptions="Start" Keyboard="Numeric" Text="{Binding VentaCosto}"/>
                     </Grid>
-                    <Label HorizontalOptions="Center" Text="Botellas" TextColor="White"/>
-                    <Grid>
-                        <Label HorizontalOptions="Start" Text="Solicitud" TextColor="White"/>
-                        <Label HorizontalOptions="EndAndExpand" Text="Disponible" TextColor="White"/>
+                    <Grid ColumnDefinitions="*,*,*">
+                        <Label Grid.Column="0" HorizontalOptions="Center" Text="Botellas" TextColor="White"/>
+                        <Label Grid.Column="1" HorizontalOptions="Center" Text="Solicitud" TextColor="White"/>
+                        <Label Grid.Column="2" HorizontalOptions="Center" Text="Disponible" TextColor="White"/>
                     </Grid>
                     <Label/>
+                    <Grid ColumnDefinitions="0.8*,*">
+                        <StackLayout Grid.Column="0">
+                            <CollectionView ItemsSource="{Binding SalidasBotellas}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:SalidasBotella">
+                                        <Grid Padding="0" ColumnDefinitions="*, auto">
+                                            <Entry Keyboard="Numeric" Text="{Binding cant}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <CollectionView ItemsSource="{Binding BotellasDisponibles}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:Botellas">
+                                        <Grid Padding="12" ColumnDefinitions="*, auto">
+                                            <Label Text="{Binding nombreBo}" TextColor="White" 
+                               HorizontalOptions="Start" VerticalOptions="Center" />
 
-                    <Label Text="Llanerita" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaLlane}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockLlane}" TextColor="White"/>
+                                            <Label Text="{Binding cantidadBo}" TextColor="White" 
+                               HorizontalOptions="End" VerticalOptions="Center" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
                     </Grid>
+                    <Label Text="Barriles"/>
+                    <Grid ColumnDefinitions="0.8*,*">
+                        <StackLayout Grid.Column="0">
+                            <CollectionView ItemsSource="{Binding SalidasBarriles}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:SalidasBarril">
+                                        <Grid Padding="0" ColumnDefinitions="*, auto">
+                                            <Entry Keyboard="Numeric" Text="{Binding cant}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <CollectionView ItemsSource="{Binding BarrilesDisponibles}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:Barriles">
+                                        <Grid Padding="12" ColumnDefinitions="*, auto">
+                                            <!-- First column: Name -->
+                                            <Label Text="{Binding nombreBa}" TextColor="White" 
+                               HorizontalOptions="Start" VerticalOptions="Center" />
 
-                    <Label Text="San Juanera" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaSJ}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockSJ}" TextColor="White"/>
-                    </Grid>
-
-                    <Label Text="Maleficio" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaMale}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockMale}" TextColor="White"/>
-                    </Grid>
-
-                    <Label Text="Barranqueña" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBarra}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockBarra}" TextColor="White"/>
-                    </Grid>
-
-                    <Label Text="Toloachi" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaTolo}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockTolo}" TextColor="White"/>
-                    </Grid>
-
-                    <Label Text="Barrio 21" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaB21}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockB21}" TextColor="White"/>
-                    </Grid>
-
-                    <Label Text="Genesis" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaGen}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockGen}" TextColor="White"/>
-                    </Grid>
-
-                    <Label Text="Celi" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaCeli}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockCeli}" TextColor="White"/>
-                    </Grid>
-
-                    <Label Text="Guasanta" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaGuasanta}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockGuasanta}" TextColor="White"/>
-                    </Grid>
-
-                    <Label HorizontalOptions="Center" Text="Barriles" TextColor="White"/>
-                    <Grid>
-                        <Label HorizontalOptions="Start" Text="Solicitud" TextColor="White"/>
-                        <Label HorizontalOptions="EndAndExpand" Text="Disponible" TextColor="White"/>
-                    </Grid>
-                    <Label/>
-
-                    <Label Text="Llanerita" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaLlane}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockBaLlane}" TextColor="White"/>
-                    </Grid>
-
-                    <Label Text="San Juanera" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaSJ}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockBaSJ}" TextColor="White"/>
-                    </Grid>
-
-                    <Label Text="Maleficio" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaMale}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockBaMale}" TextColor="White"/>
-                    </Grid>
-
-                    <Label Text="Barranqueña" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaBarra}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockBaBarra}" TextColor="White"/>
-                    </Grid>
-
-                    <Label Text="Toloachi" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaTolo}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockBaTolo}" TextColor="White"/>
-                    </Grid>
-
-                    <Label Text="Barrio 21" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaB21}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockBaB21}" TextColor="White"/>
-                    </Grid>
-
-                    <Label Text="Genesis" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaGen}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockBaGen}" TextColor="White"/>
-                    </Grid>
-
-                    <Label Text="Celi" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaCeli}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockBaCeli}" TextColor="White"/>
-                    </Grid>
-
-                    <Label Text="Guasanta" TextColor="White"/>
-                    <Grid>
-                        <Entry Keyboard="Numeric" HorizontalOptions="StartAndExpand" Text="{Binding SalidaBaGuasanta}" TextColor="White"/>
-                        <Label HorizontalOptions="End" Text="{Binding StockBaGuasanta}" TextColor="White"/>
+                                            <!-- Second column: Quantity -->
+                                            <Label Text="{Binding cantidadBa}" TextColor="White" 
+                               HorizontalOptions="End" VerticalOptions="Center" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
                     </Grid>
 
                     <Button

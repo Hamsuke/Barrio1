@@ -1,5 +1,3 @@
-﻿using Supabase;
-
 namespace Barrio1.Models
 {
     internal class AppConfig
