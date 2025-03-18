@@ -20,13 +20,13 @@
 		<Nullable>disable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>Barrio1</ApplicationTitle>
+		<ApplicationTitle>BarrioChico Inv.</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.barrio1</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.3</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>1.4</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>

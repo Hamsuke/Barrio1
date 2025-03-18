@@ -16,7 +16,7 @@
 
     <ScrollView>
         <Grid>
-            <Grid Grid.Row="0" Grid.Column="0" HorizontalOptions="Fill">
+            <Grid Grid.Row="0" Grid.Column="0" HorizontalOptions="Fill" >
                 <VerticalStackLayout Margin="20">
                     <Label Text="Cliente" TextColor="White"/>
                     <Entry Text="{Binding VentaCliente}" TextColor="White" />
@@ -45,7 +45,7 @@
                         <Label Grid.Column="1" HorizontalOptions="Center" Text="Solicitud" TextColor="White"/>
                         <Label Grid.Column="2" HorizontalOptions="Center" Text="Disponible" TextColor="White"/>
                     </Grid>
-                    <Label/>
+                    
                     <Grid ColumnDefinitions="0.8*,*">
                         <StackLayout Grid.Column="0">
                             <CollectionView ItemsSource="{Binding SalidasBotellas}">

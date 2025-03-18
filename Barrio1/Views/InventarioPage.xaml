@@ -12,31 +12,38 @@
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior Command="{Binding GetInventarioCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
-    
+
     <Grid RowDefinitions="*,*" ColumnDefinitions="*,*">
-        <StackLayout Grid.Row="0">
-            <Label Text="Botellas"/>
+        <StackLayout Grid.Row="0" Grid.Column="0">
+            <Frame BackgroundColor="Gray">
+                <Label Text="Botellas" TextColor="White" />
+            </Frame>
             <CollectionView ItemsSource="{Binding InventarioBo}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Botellas">
-                        
-                        <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="*,*">
-                            <Label Grid.Column="0" Text="{Binding nombreBo}"/>
-                            <Label Grid.Column="1" Text="{Binding cantidadBo}"/>
-                        </Grid>
+                        <Frame BackgroundColor="Gray">
+                            <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="*,*">
+                                <Label Grid.Column="0" TextColor="White" Text="{Binding nombreBo}"/>
+                                <Label Grid.Column="1" TextColor="White" Text="{Binding cantidadBo}"/>
+                            </Grid>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </StackLayout>
-        <StackLayout Grid.Row="1">
-            <Label Text="Barriles"/>
+        <StackLayout Grid.Row="0" Grid.Column="1">
+            <Frame BackgroundColor="Gray">
+                <Label Text="Barriles" TextColor="White"/>
+            </Frame>
             <CollectionView ItemsSource="{Binding InventarioBa}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Barriles">
-                        <Grid Grid.Row="3" Grid.Column="0" ColumnDefinitions="*,*">
-                            <Label Grid.Column="0" Text="{Binding nombreBa}" />
-                            <Label Grid.Column="1" Text="{Binding cantidadBa}"/>
-                        </Grid>
+                        <Frame BackgroundColor="Gray">
+                            <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="*,*">
+                                <Label Grid.Column="0" TextColor="White" Text="{Binding nombreBa}" />
+                                <Label Grid.Column="1" TextColor="White" Text="{Binding cantidadBa}"/>
+                            </Grid>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
