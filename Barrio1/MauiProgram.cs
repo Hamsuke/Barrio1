@@ -4,15 +4,6 @@ using Barrio1.ViewModels;
 using Barrio1.Views;
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
-using Plugin.Firebase.Auth;
-using Plugin.Firebase.Bundled.Shared;
-using Plugin.Firebase.Crashlytics;
-using Microsoft.Maui.LifecycleEvents;
-
-
-#if ANDROID
-using Plugin.Firebase.Bundled.Platforms.Android;
-#endif
 
 
 namespace Barrio1
@@ -26,6 +17,7 @@ namespace Barrio1
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                fonts.AddFont("Clarendon.otf", "Clarendon");
             }).UseMauiCommunityToolkit();
 
             //Servicios integrados
@@ -62,27 +54,5 @@ namespace Barrio1
 #endif
             return builder.Build();
         }
-
-        //private static MauiAppBuilder RegisterFirebaseServices(this MauiAppBuilder builder)
-        //{
-        //    builder.ConfigureLifecycleEvents(events =>
-        //    {
-        //        events.AddAndroid(Android => Android.OnCreate((activity, _) =>
-        //            CrossFirebase.Initialize(activity, CreateCrossFirebaseSettings())));
-        //        CrossFirebaseCrashlytics.Current.SetCrashlyticsCollectionEnabled(true);
-        //    });
-
-        //    builder.Services.AddSingleton(_ => CrossFirebaseAuth.Current);
-        //    return builder;
-        //}
-
-        //private static CrossFirebaseSettings CreateCrossFirebaseSettings()
-        //{
-        //    return new CrossFirebaseSettings(
-        //        isAuthEnabled: true,
-        //        isCloudMessagingEnabled: true,
-        //        isAnalyticsEnabled: true
-        //        );
-        //}
     }
 }

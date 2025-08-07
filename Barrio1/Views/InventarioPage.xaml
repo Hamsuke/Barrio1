@@ -7,7 +7,7 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodel="clr-namespace:Barrio1.ViewModels"
     x:DataType="viewmodel:InventarioViewModel"
-    BackgroundColor="#2D2D2D"
+    BackgroundColor="{DynamicResource Fondo}"
     >
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior Command="{Binding GetInventarioCommand}" EventName="Appearing" />

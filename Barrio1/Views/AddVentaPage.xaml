@@ -7,7 +7,7 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodel="clr-namespace:Barrio1.ViewModels"
     x:DataType="viewmodel:AddVentaViewModel"
-    BackgroundColor="#2D2D2D"
+    BackgroundColor="{DynamicResource Fondo}"
     >
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior Command="{Binding getBarrilesCommand}" EventName="Appearing" />
@@ -18,17 +18,17 @@
         <Grid>
             <Grid Grid.Row="0" Grid.Column="0" HorizontalOptions="Fill" >
                 <VerticalStackLayout Margin="20">
-                    <Label Text="Cliente" TextColor="White"/>
-                    <Entry Text="{Binding VentaCliente}" TextColor="White" />
-                    <Label Text="Numero de Nota" TextColor="White"/>
-                    <Entry Keyboard="Numeric" TextColor="White" Text="{Binding Nota}"/>
-                    <Grid>
-                        <Label Text="Pago (Si no hay dejar en 0)" TextColor="White"/>
+                    <Label Text="Cliente"/>
+                    <Entry Text="{Binding VentaCliente}"/>
+                    <Label Text="Numero de Nota" />
+                    <Entry Keyboard="Numeric" Text="{Binding Nota}"/>
+                    <Grid Grid.ColumnDefinitions="*, auto" Grid.RowDefinitions="*,*">
+                        <Label Text="Pago (Si no hay dejar en 0)" Grid.Column="0"/>
+                        <Entry Grid.Column="0" HorizontalOptions="Start" Keyboard="Numeric" Text="{Binding VentaPago}"/>
                     </Grid>
                     <Grid>
-                        <Entry Grid.Column="0" HorizontalOptions="Start" TextColor="White" Keyboard="Numeric" Text="{Binding VentaPago}"/>
                         <Picker Grid.Column="1" HorizontalOptions="EndAndExpand"
-                                Title="Metodo de pago" TextColor="White" SelectedItem="{Binding Metodo}">
+                                Title="Metodo de pago" SelectedItem="{Binding Metodo}">
                             <Picker.Items>
                                 <x:String>Tarjeta</x:String>
                                 <x:String>Transferencia</x:String>
@@ -36,23 +36,25 @@
                             </Picker.Items>
                         </Picker>
                     </Grid>
-                    <Label Text="Valor de venta" TextColor="White"/>
+                    <Label Text="Valor de venta"/>
                     <Grid>
-                        <Entry Grid.Column="0" TextColor="White" HorizontalOptions="Start" Keyboard="Numeric" Text="{Binding VentaCosto}"/>
+                        <Entry Grid.Column="0" HorizontalOptions="Start" 
+                               Keyboard="Numeric" Text="{Binding VentaCosto}"/>
                     </Grid>
                     <Grid ColumnDefinitions="*,*,*">
-                        <Label Grid.Column="0" HorizontalOptions="Center" Text="Botellas" TextColor="White"/>
-                        <Label Grid.Column="1" HorizontalOptions="Center" Text="Solicitud" TextColor="White"/>
-                        <Label Grid.Column="2" HorizontalOptions="Center" Text="Disponible" TextColor="White"/>
+                        <Label Grid.Column="0" HorizontalOptions="Center" Text="Solicitud"/>
+                        <Label Grid.Column="1" HorizontalOptions="Center" Text="Botellas" />
+                        <Label Grid.Column="2" HorizontalOptions="Center" Text="Disponible" />
                     </Grid>
                     
-                    <Grid ColumnDefinitions="0.8*,*">
+                    <Grid ColumnDefinitions="0.55*,*">
                         <StackLayout Grid.Column="0">
                             <CollectionView ItemsSource="{Binding SalidasBotellas}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="model:SalidasBotella">
                                         <Grid Padding="0" ColumnDefinitions="*, auto">
-                                            <Entry Keyboard="Numeric" Text="{Binding cant}"/>
+                                            <Entry Keyboard="Numeric" Text="{Binding cant}" 
+                                                   HorizontalTextAlignment="Center"/>
                                         </Grid>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
@@ -62,11 +64,11 @@
                             <CollectionView ItemsSource="{Binding BotellasDisponibles}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="model:Botellas">
-                                        <Grid Padding="12" ColumnDefinitions="*, auto">
-                                            <Label Text="{Binding nombreBo}" TextColor="White" 
-                               HorizontalOptions="Start" VerticalOptions="Center" />
+                                        <Grid Padding="14" ColumnDefinitions="*, auto">
+                                            <Label Text="{Binding nombreBo}" 
+                               HorizontalOptions="Start" VerticalOptions="Center"/>
 
-                                            <Label Text="{Binding cantidadBo}" TextColor="White" 
+                                            <Label Text="{Binding cantidadBo}" 
                                HorizontalOptions="End" VerticalOptions="Center" />
                                         </Grid>
                                     </DataTemplate>
@@ -74,14 +76,19 @@
                             </CollectionView>
                         </StackLayout>
                     </Grid>
-                    <Label Text="Barriles"/>
-                    <Grid ColumnDefinitions="0.8*,*">
+                    <Grid ColumnDefinitions="*,*,*">
+                        <Label Grid.Column="0" HorizontalOptions="Center" Text="Solicitud"/>
+                        <Label Grid.Column="1" HorizontalOptions="Center" Text="Barriles" />
+                        <Label Grid.Column="2" HorizontalOptions="Center" Text="Disponible" />
+                    </Grid>
+                    <Grid ColumnDefinitions="0.55*,*">
                         <StackLayout Grid.Column="0">
                             <CollectionView ItemsSource="{Binding SalidasBarriles}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="model:SalidasBarril">
                                         <Grid Padding="0" ColumnDefinitions="*, auto">
-                                            <Entry Keyboard="Numeric" Text="{Binding cant}"/>
+                                            <Entry Keyboard="Numeric" Text="{Binding cant}"
+                                                   HorizontalTextAlignment="Center"/>
                                         </Grid>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
@@ -91,13 +98,13 @@
                             <CollectionView ItemsSource="{Binding BarrilesDisponibles}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="model:Barriles">
-                                        <Grid Padding="12" ColumnDefinitions="*, auto">
+                                        <Grid Padding="14" ColumnDefinitions="*, auto">
                                             <!-- First column: Name -->
-                                            <Label Text="{Binding nombreBa}" TextColor="White" 
+                                            <Label Text="{Binding nombreBa}" 
                                HorizontalOptions="Start" VerticalOptions="Center" />
 
                                             <!-- Second column: Quantity -->
-                                            <Label Text="{Binding cantidadBa}" TextColor="White" 
+                                            <Label Text="{Binding cantidadBa}" 
                                HorizontalOptions="End" VerticalOptions="Center" />
                                         </Grid>
                                     </DataTemplate>
@@ -107,10 +114,9 @@
                     </Grid>
 
                     <Button
-                    Background="#3ece8e"
                     Command="{Binding AddVentaCommand}"
                     Text="Añadir Venta"
-                    TextColor="#eff5f3" />
+                    />
                 </VerticalStackLayout>
             </Grid>
         </Grid>

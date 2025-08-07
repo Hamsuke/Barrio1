@@ -6,7 +6,7 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodel="clr-namespace:Barrio1.ViewModels"
     x:DataType="viewmodel:VentasListingViewModel"
-    BackgroundColor="#2D2D2D">
+    BackgroundColor="{DynamicResource Fondo}">
 
     <ContentPage.Resources>
         <toolkit:BoolToObjectConverter
@@ -20,53 +20,64 @@
     </ContentPage.Behaviors>
 
     <Grid
-        Margin="20"
+        Margin="30"
         RowDefinitions="Auto,*"
         RowSpacing="20">
 
         <!-- Encabezado -->
-        <Grid Grid.Row="0" ColumnDefinitions="*,Auto,Auto" RowDefinitions="*,Auto">
-            <Label
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,*" RowDefinitions="*,Auto,Auto" RowSpacing="4">
+            <Image
                 Grid.Column="0"
+                Grid.RowSpan="3"
+                Source="maquina.svg"
+                Aspect="AspectFill"
+                HeightRequest="100"
+                WidthRequest="100"
+                />
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
                 FontAttributes="Bold"
                 FontSize="Title"
-                Text="Registro"
-                HorizontalOptions="Start"
-                TextColor="White" />
+                Text="Ventas"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="Center"
+                />
 
             <Button
-                Grid.Column="1"
-                Background="#3ece8e"
+                Grid.Row="0"
+                Grid.Column="2"
                 Command="{Binding GetInventarioCommand}"
                 Text="Inventario"
-                TextColor="White" />
+                />
 
             <Button
+                Grid.Row="1"
                 Grid.Column="2"
-                Background="#3ece8e"
                 Command="{Binding AddVentaCommand}"
                 Text="Añadir venta"
-                TextColor="White" />
+                />
 
 
             <!-- Filtro de fechas -->
 
-            <DatePicker Grid.Row="1" Grid.Column="1"
+            <DatePicker Grid.Row="2" Grid.Column="1"
                         x:Name="DatePicker"
                         Format="MM yyyy"
                         MaximumDate="{Binding MaxDate}"
                         MinimumDate="{Binding MinDate}"
-                        Date="{Binding SelectedDate}">
+                        Date="{Binding SelectedDate}"
+                        HorizontalOptions="CenterAndExpand">
 
             </DatePicker>
             
             <Button
-                    Grid.Row="1"
+                    Grid.Row="2"
                     Grid.Column="2"
                     Text="Filtrar"
                     Command="{Binding FiltrarVentasCommand}"
-                    BackgroundColor="#3ece8e"
-                    TextColor="White" />
+                    Style="{DynamicResource Boton}"
+                    />
         </Grid>
 
         <!-- Listado -->
@@ -79,40 +90,35 @@
                     <Border
                         Padding="15"
                         Stroke="Dimgray"
-                        Background="#601d2021"
                         StrokeThickness="1">
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="10" />
                         </Border.StrokeShape>
-                        <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="5">
+                        <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
                             <Label
-                                TextColor="White"
                                 Grid.Row="0"
                                 FontAttributes="Bold"
                                 Text="{Binding id, StringFormat='Nota: {0}'}" />
                             <Label
-                                TextColor="White"
                                 Grid.Row="1"
                                 Text="{Binding name, StringFormat='Cliente: {0}'}"/>
                             <Label
                                 Grid.Row="2"
                                 Text="{Binding est, Converter={StaticResource BoolToObjectConverter}}"
-                                TextColor="#eff5f3" />
+                                />
 
-                            <StackLayout Orientation="Horizontal" HorizontalOptions="End" Grid.Row="3">
+                            <StackLayout Orientation="Vertical" HorizontalOptions="End" Grid.Row="0" Grid.RowSpan="3">
                                 <Button
-                                    BackgroundColor="Crimson"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:VentasListingViewModel}}, Path=DetallesNotaCommand}"
                                     CommandParameter="{Binding .}"
                                     Text="Detalles"
-                                    TextColor="White" />
+                                    />
 
                                 <Button
-                                    BackgroundColor="#4A88DA"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:VentasListingViewModel}}, Path=UpdateVentaCommand}"
                                     CommandParameter="{Binding .}"
                                     Text="Actualizar"
-                                    TextColor="#eff5f3" />
+                                    />
                             </StackLayout>
                         </Grid>
                     </Border>
