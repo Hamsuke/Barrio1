@@ -147,9 +147,22 @@ public partial class AddVentaViewModel : ObservableObject
             if (salidasBotellasList.Any())
             {
                 await RetryAsync(() => _dataService.BulkCreateSalidaBotella(salidasBotellasList));
-                foreach (var salida in salidasBotellasList)
-                    await RetryAsync(() => _dataService.updateBotella(salida));
+
+                // Ejecutar en segundo plano
+                _ = Task.Run(async () =>
+                {
+                    try
+                    {
+                        foreach (var salida in salidasBotellasList)
+                            await RetryAsync(() => _dataService.updateBotella(salida));
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error actualizando botellas: {ex}");
+                    }
+                });
             }
+
 
             var salidasBarrilesList = SalidasBarriles
                 .Where(item => item.cant > 0)
@@ -163,9 +176,20 @@ public partial class AddVentaViewModel : ObservableObject
 
             if (salidasBarrilesList.Any())
             {
-                await RetryAsync(() => _dataService.BulkCreateSalidaBarril(salidasBarrilesList));
-                foreach (var salida in salidasBarrilesList)
-                    await RetryAsync(() => _dataService.updateBarril(salida));
+                await RetryAsync(() => _dataService.BulkCreateSalidaBotella(salidasBotellasList));
+
+                _ = Task.Run(async () =>
+                {
+                    try
+                    {
+                        foreach (var salida in salidasBarrilesList)
+                            await RetryAsync(() => _dataService.updateBarril(salida));
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error actualizando barriles: {ex}");
+                    }
+                });
             }
 
             await Shell.Current.GoToAsync("..");

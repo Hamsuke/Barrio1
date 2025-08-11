@@ -6,8 +6,6 @@ namespace Barrio1.Services
     {
         Task<IEnumerable<Ventas>> GetVentas(DateTime inicioDeMes, DateTime diaActual);
         Task CreateVenta(Ventas venta);
-        Task CreateSalidaBotella(SalidasBotella salida);
-        Task CreateSalidaBarril(SalidasBarril salida);
         Task BulkCreateSalidaBarril(IEnumerable<SalidasBarril> salidas);
         Task BulkCreateSalidaBotella(IEnumerable<SalidasBotella> salidas);
         Task UpdateVenta(Ventas venta);
