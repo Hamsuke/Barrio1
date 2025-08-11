@@ -7,7 +7,6 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodel="clr-namespace:Barrio1.ViewModels"
     x:DataType="viewmodel:AddVentaViewModel"
-    BackgroundColor="{DynamicResource Fondo}"
     >
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior Command="{Binding getBarrilesCommand}" EventName="Appearing" />
@@ -22,25 +21,23 @@
                     <Entry Text="{Binding VentaCliente}"/>
                     <Label Text="Numero de Nota" />
                     <Entry Keyboard="Numeric" Text="{Binding Nota}"/>
-                    <Grid Grid.ColumnDefinitions="*, auto" Grid.RowDefinitions="*,*">
-                        <Label Text="Pago (Si no hay dejar en 0)" Grid.Column="0"/>
-                        <Entry Grid.Column="0" HorizontalOptions="Start" Keyboard="Numeric" Text="{Binding VentaPago}"/>
-                    </Grid>
-                    <Grid>
-                        <Picker Grid.Column="1" HorizontalOptions="EndAndExpand"
-                                Title="Metodo de pago" SelectedItem="{Binding Metodo}">
-                            <Picker.Items>
-                                <x:String>Tarjeta</x:String>
-                                <x:String>Transferencia</x:String>
-                                <x:String>Efectivo</x:String>
-                            </Picker.Items>
-                        </Picker>
-                    </Grid>
-                    <Label Text="Valor de venta"/>
-                    <Grid>
-                        <Entry Grid.Column="0" HorizontalOptions="Start" 
+                    <Grid ColumnDefinitions="*, auto" RowDefinitions="*,*" RowSpacing="5" ColumnSpan="5">
+                        <Label Text="Valor de venta" Grid.Column="0" Grid.Row="0"/>
+                        <Entry Grid.Column="0" Grid.Row="1" HorizontalTextAlignment="Start"
                                Keyboard="Numeric" Text="{Binding VentaCosto}"/>
+                        <Label Text="Pago (Si no hay dejar en 0)" Grid.Column="1" Grid.Row="0"/>
+                        <Entry Grid.Column="1" Grid.Row="1" HorizontalTextAlignment="Start" 
+                               Keyboard="Numeric" Text="{Binding VentaPago}"/>
+
                     </Grid>
+                    <Picker
+                        Title="Metodo de pago" SelectedItem="{Binding Metodo}">
+                        <Picker.Items>
+                            <x:String>Tarjeta</x:String>
+                            <x:String>Transferencia</x:String>
+                            <x:String>Efectivo</x:String>
+                        </Picker.Items>
+                    </Picker>
                     <Grid ColumnDefinitions="*,*,*">
                         <Label Grid.Column="0" HorizontalOptions="Center" Text="Solicitud"/>
                         <Label Grid.Column="1" HorizontalOptions="Center" Text="Botellas" />
@@ -114,7 +111,7 @@
                     </Grid>
 
                     <Button
-                    Command="{Binding AddVentaCommand}"
+                    Command="{Binding AddVenta2Command}"
                     Text="Añadir Venta"
                     />
                 </VerticalStackLayout>

@@ -7,31 +7,30 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodel="clr-namespace:Barrio1.ViewModels"
     x:DataType="viewmodel:UpdateVentaViewModel"
-    BackgroundColor="#2D2D2D">
+    >
+
     <VerticalStackLayout Margin="20">
-        <Grid ColumnDefinitions="100, 115">
-            <Grid Grid.Column="0" Grid.Row="0">
-                <Label Text="Pago" TextColor="White"/>
-            </Grid>
-            <Grid Grid.Column="1" Grid.Row="0">
-                <Picker Title="Metodo de pago" TextColor="White" SelectedItem="{Binding Venta.metodo}">
-                    <Picker.Items>
-                        <x:String>Tarjeta</x:String>
-                        <x:String>Transferencia</x:String>
-                        <x:String>Efectivo</x:String>
-                    </Picker.Items>
-                </Picker>
-            </Grid>
+        <Grid ColumnDefinitions="200, 115" RowDefinitions="*,*,*,*" RowSpacing="10">
+
+            <Label Text="Saldo pagado" Grid.Column="0" Grid.Row="0"/>
+            <Label Text="{Binding Venta.pago}" Grid.Column="1" Grid.Row="0"/>
+            <Label Text="Costo de venta" Grid.Column="0" Grid.Row="1"/>
+            <Label Text="{Binding Venta.costo}" Grid.Column="1" Grid.Row="1"/>
+            <Label Text="Pago" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="2"/>
+            
+            <Picker Grid.Column="1" Grid.Row="2" Title="Metodo de pago" SelectedItem="{Binding Venta.metodo}">
+                <Picker.Items>
+                    <x:String>Tarjeta</x:String>
+                    <x:String>Transferencia</x:String>
+                    <x:String>Efectivo</x:String>
+                </Picker.Items>
+            </Picker>
+            <Entry Text="{Binding Tmp}" Grid.Row="3"/>
         </Grid>
-        <Entry Text="{Binding Tmp}" TextColor="White"/>
-        <Label Text="Saldo pagado" TextColor="White"/>
-        <Label Text="{Binding Venta.pago}" TextColor="White"/>
-        <Label Text="Costo de venta" TextColor="White"/>
-        <Label Text="{Binding Venta.costo}" TextColor="White"/>
+
         <Button
-            Background="#4A88DA"
             Command="{Binding UpdateVentaCommand}"
             Text="Actualizar"
-            TextColor="#eff5f3" />
+            />
     </VerticalStackLayout>
 </ContentPage>

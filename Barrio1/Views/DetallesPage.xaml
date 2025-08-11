@@ -7,7 +7,7 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodel="clr-namespace:Barrio1.ViewModels"
     x:DataType="viewmodel:DetallesViewModel"
-    BackgroundColor="#2D2D2D">
+    >
 
     <ContentPage.Resources>
         <toolkit:BoolToObjectConverter
@@ -24,38 +24,44 @@
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" RowSpacing="6" ColumnSpacing="6">
 
             <StackLayout Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
-                <Frame BackgroundColor="Gray">
+                <Border Padding="10"
+                        Stroke="Dimgray"
+                        StrokeThickness="1"
+                >
                     <Grid RowDefinitions="auto,auto,auto,auto,auto" ColumnDefinitions="*,*,*,*" ColumnSpacing="20">
-                        <Label Text="Nota" TextColor="White" Grid.ColumnSpan="4" FontSize="Title" HorizontalOptions="Center" Grid.Row="0" Grid.Column="0"/>
+                        <Label Text="Nota" Grid.ColumnSpan="4" FontSize="Title" HorizontalOptions="Center" Grid.Row="0" Grid.Column="0"/>
 
-                        <Label Grid.Column="0" Grid.Row="1" Text="Vendedor:" TextColor="White"/>
-                        <Label Grid.Column="0" Grid.Row="2" Text="Cliente:" TextColor="White"/>
-                        <Label Grid.Column="0" Grid.Row="3" Text="Numero:" TextColor="White"/>
+                        <Label Grid.Column="0" Grid.Row="1" Text="Vendedor:"/>
+                        <Label Grid.Column="0" Grid.Row="2" Text="Cliente:"/>
+                        <Label Grid.Column="0" Grid.Row="3" Text="Numero:"/>
 
-                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Venta.vendor}" TextColor="White"/>
-                        <Label Grid.Column="1" Grid.Row="2" Text="{Binding Venta.name}" TextColor="White"/>
-                        <Label Grid.Column="1" Grid.Row="3" Text="{Binding Venta.id}" TextColor="White"/>
+                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Venta.vendor}"/>
+                        <Label Grid.Column="1" Grid.Row="2" Text="{Binding Venta.name}"/>
+                        <Label Grid.Column="1" Grid.Row="3" Text="{Binding Venta.id}"/>
 
-                        <Label Grid.Column="2" Grid.Row="1" Text="Cantidad a pagar:" TextColor="White"/>
-                        <Label Grid.Column="2" Grid.Row="2" Text="Cantidad pagada:" TextColor="White"/>
-                        <Label Grid.Column="2" Grid.Row="3" Text="Estado de nota:" TextColor="White"/>
-                        <Label Grid.Column="2" Grid.Row="4" Text="Metodo de pago:" TextColor="White"/>
+                        <Label Grid.Column="2" Grid.Row="1" Text="Cantidad a pagar:" />
+                        <Label Grid.Column="2" Grid.Row="2" Text="Cantidad pagada:" />
+                        <Label Grid.Column="2" Grid.Row="3" Text="Estado de nota:" />
+                        <Label Grid.Column="2" Grid.Row="4" Text="Metodo de pago:" />
 
-                        <Label Grid.Column="3" Grid.Row="1" Text="{Binding Venta.costo}" TextColor="White"/>
-                        <Label Grid.Column="3" Grid.Row="2" Text="{Binding Venta.pago}" TextColor="White"/>
-                        <Label Grid.Column="3" Grid.Row="3" Text="{Binding Venta.est}" TextColor="White"/>
-                        <Label Grid.Column="3" Grid.Row="4" Text="{Binding Venta.metodo}" TextColor="White"/>
+                        <Label Grid.Column="3" Grid.Row="1" Text="{Binding Venta.costo}"/>
+                        <Label Grid.Column="3" Grid.Row="2" Text="{Binding Venta.pago}" />
+                        <Label Grid.Column="3" Grid.Row="3" Text="{Binding Venta.est, Converter={StaticResource BoolToObjectConverter}}"/>
+                        <Label Grid.Column="3" Grid.Row="4" Text="{Binding Venta.metodo}" />
                     </Grid>
-                </Frame>
+                </Border>
             </StackLayout>
 
             <!-- CollectionView for SalidasBotella -->
             <StackLayout Grid.Row="1" Grid.Column="0">
                 <!-- Frame to wrap the CollectionView -->
-                <Frame Padding="10" BackgroundColor="Gray">
+                <Border Padding="10"
+                        Stroke="Dimgray"
+                        StrokeThickness="1"
+                        >
                     <StackLayout>
                         <!-- Label for "Botellas" -->
-                        <Label Text="Botellas" TextColor="White" FontSize="Medium" HorizontalOptions="Center" Margin="0,0,0,10"/>
+                        <Label Text="Botellas" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,10"/>
 
                         <!-- CollectionView for SalidasBotella -->
                         <CollectionView ItemsSource="{Binding SalidasBotella}">
@@ -63,25 +69,28 @@
                                 <DataTemplate x:DataType="model:SalidasBotella">
                                     <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
                                         <!-- Botella Label -->
-                                        <Label Grid.Row="1" Grid.Column="0" TextColor="White" Text="{Binding botella}"/>
+                                        <Label Grid.Row="1" FontSize="12" VerticalOptions="Center" Grid.Column="0" Text="{Binding botella}"/>
 
                                         <!-- Cantidad Label -->
-                                        <Label Grid.Row="1" Grid.Column="1" TextColor="White" Text="{Binding cant}"/>
+                                        <Label Grid.Row="1" FontSize="12" VerticalTextAlignment="Center" Grid.Column="1" Text="{Binding cant}"/>
                                     </Grid>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                     </StackLayout>
-                </Frame>
+                </Border>
             </StackLayout>
 
             <!-- CollectionView for SalidasBotella -->
             <StackLayout Grid.Row="1" Grid.Column="1">
                 <!-- Frame to wrap the CollectionView -->
-                <Frame Padding="10" BackgroundColor="Gray">
+                <Border Padding="10"
+                        Stroke="Dimgray"
+                        StrokeThickness="1"
+                        >
                     <StackLayout>
                         <!-- Label for "Botellas" -->
-                        <Label Text="Barriles" TextColor="White" FontSize="Medium" HorizontalOptions="Center" Margin="0,0,0,10"/>
+                        <Label Text="Barriles" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,10"/>
 
                         <!-- CollectionView for SalidasBotella -->
                         <CollectionView ItemsSource="{Binding SalidasBarril}">
@@ -89,16 +98,16 @@
                                 <DataTemplate x:DataType="model:SalidasBarril">
                                     <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
                                         <!-- Botella Label -->
-                                        <Label Grid.Row="1" Grid.Column="0" TextColor="White" Text="{Binding barril}"/>
+                                        <Label Grid.Row="1" FontSize="10" VerticalOptions="Center" Grid.Column="0" Text="{Binding barril}"/>
 
                                         <!-- Cantidad Label -->
-                                        <Label Grid.Row="1" Grid.Column="1" TextColor="White" Text="{Binding cant}"/>
+                                        <Label Grid.Row="1" FontSize="10" VerticalOptions="Center" Grid.Column="1" Text="{Binding cant}"/>
                                     </Grid>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                     </StackLayout>
-                </Frame>
+                </Border>
             </StackLayout>
         </Grid>
     </StackLayout>

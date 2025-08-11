@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodel="clr-namespace:Barrio1.ViewModels"
     x:DataType="viewmodel:LoginViewModel"
-    BackgroundColor="{DynamicResource Fondo}">
+    >
 
 
 
@@ -14,7 +14,7 @@
         <Grid Grid.Row="1">
             <RoundRectangle Margin="-5,-30,-5,-2"
                             CornerRadius="30,30,0,0"
-                            Fill="{DynamicResource Fondo}"/>
+                            />
 
             <VerticalStackLayout Margin="30,0,30,0">
                 <Entry

@@ -47,9 +47,11 @@
     <Color x:Key="BotonO">#5086c6</Color>
     <Color x:Key="FuenteO">#fdfce8</Color>
     <Color x:Key="FondoMarcoO">#2e2e2e</Color>
+    <Color x:Key="FondoO">#2e2e2e</Color>
 
     <!-- Colores claros -->
     <Color x:Key="BotonC">#cb123e</Color>
     <Color x:Key="FuenteC">#111111</Color>
     <Color x:Key="FondoMarcoC">#fefef6</Color>
+    <Color x:Key="FondoC">#fefef6</Color>
 </ResourceDictionary>

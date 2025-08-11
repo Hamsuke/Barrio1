@@ -13,23 +13,43 @@ public class DataServices : IDataServices
     {
         _supabaseClient = supabaseClient;
     }
+
     public async Task<IEnumerable<Ventas>> GetVentas(DateTime inicioDeMes, DateTime diaActual)
     {
-        var response = await _supabaseClient.From<Ventas>().Where(v => v.dateC >= inicioDeMes && v.dateC <= diaActual).Get();
+        var response = await _supabaseClient.From<Ventas>().Where(v => v.dateC >= inicioDeMes && v.dateC <= diaActual)
+            .Get();
         return response.Models.OrderByDescending(b => b.id);
     }
+
     public async Task CreateVenta(Ventas venta)
     {
         await _supabaseClient.From<Ventas>().Insert(venta);
     }
+
     public async Task CreateSalidaBotella(SalidasBotella salida)
     {
         await _supabaseClient.From<SalidasBotella>().Insert(salida);
     }
+
     public async Task CreateSalidaBarril(SalidasBarril salida)
     {
         await _supabaseClient.From<SalidasBarril>().Insert(salida);
     }
+
+    public async Task BulkCreateSalidaBarril(IEnumerable<SalidasBarril> salidas)
+    {
+        await _supabaseClient
+            .From<SalidasBarril>()
+            .Insert(salidas.ToList());
+    }
+
+    public async Task BulkCreateSalidaBotella(IEnumerable<SalidasBotella> salidas)
+    {
+        await _supabaseClient
+            .From<SalidasBotella>()
+            .Insert(salidas.ToList());
+    }
+
     public async Task UpdateVenta(Ventas venta)
     {
         var tmp = await _supabaseClient.From<Ventas>()
@@ -42,6 +62,7 @@ public class DataServices : IDataServices
             venta.est = true;
             venta.dateP = DateTime.Now;
         }
+
         await _supabaseClient.From<Ventas>()
             .Where(b => b.id == venta.id)
             .Set(b => b.id, venta.id)
@@ -54,32 +75,45 @@ public class DataServices : IDataServices
             .Set(b => b.costo, venta.costo)
             .Update();
     }
+
     public async Task updateBotella(SalidasBotella salida)
     {
-        var tmp = await _supabaseClient.From<Botellas>()
+        var botella = await _supabaseClient
+            .From<Botellas>()
             .Where(b => b.nombreBo == salida.botella)
             .Single();
-        tmp.cantidadBo = tmp.cantidadBo - salida.cant;
-        await _supabaseClient.From<Botellas>()
-            .Where(b => b.nombreBo == tmp.nombreBo)
-            .Set(b => b.cantidadBo, tmp.cantidadBo)
-            .Update();
+
+
+        // Evitar que la cantidad sea negativa
+        botella.cantidadBo = Math.Max(0, botella.cantidadBo - salida.cant);
+
+        // Actualizar por Id (más eficiente que buscar otra vez)
+        await _supabaseClient
+            .From<Botellas>()
+            .Where(b => b.id == botella.id)
+            .Update(botella);
     }
     public async Task updateBarril(SalidasBarril salida)
     {
-        var tmp = await _supabaseClient.From<Barriles>()
-    .Where(b => b.nombreBa == salida.barril)
-    .Single();
-        tmp.cantidadBa = tmp.cantidadBa - salida.cant;
-        await _supabaseClient.From<Barriles>()
-            .Where(b => b.nombreBa == tmp.nombreBa)
-            .Set(b => b.cantidadBa, tmp.cantidadBa)
-            .Update();
+        var barril = await _supabaseClient
+            .From<Barriles>()
+            .Where(b => b.nombreBa == salida.barril)
+            .Single();
+
+        // Evitar que la cantidad sea negativa
+        barril.cantidadBa = Math.Max(0, barril.cantidadBa - salida.cant);
+
+        // Actualizar por Id (más eficiente que buscar otra vez)
+        await _supabaseClient
+            .From<Barriles>()
+            .Where(b => b.id == barril.id)
+            .Update(barril);
     }
+
     public async Task<bool> Login(Users u)
     {
         Users tmp = await _supabaseClient.From<Users>()
-        .Where(b => b.id == u.id).Single();
+            .Where(b => b.id == u.id).Single();
         if (tmp.clave == u.clave)
         {
             return true;
@@ -89,34 +123,41 @@ public class DataServices : IDataServices
             return false;
         }
     }
+
     public async Task<IEnumerable<Botellas>> GetBotellas()
     {
         var response = await _supabaseClient.From<Botellas>().Get();
         return response.Models.OrderByDescending(b => b.id);
     }
+
     public async Task<IEnumerable<Botellas>> GetBotellasDisp()
     {
-        var response = await _supabaseClient.From<Botellas>().Get();
+        var response = await _supabaseClient.From<Botellas>().Where(b => b.cantidadBo > 0).Get();
         return response.Models.OrderByDescending(b => b.id);
     }
+
     public async Task<IEnumerable<Barriles>> GetBarriles()
     {
         var response = await _supabaseClient.From<Barriles>().Get();
         return response.Models.OrderByDescending(b => b.id);
     }
+
     public async Task<IEnumerable<Barriles>> GetBarrilesDisp()
     {
-        var response = await _supabaseClient.From<Barriles>().Get();
+        var response = await _supabaseClient.From<Barriles>().Where(b => b.cantidadBa > 0).Get();
         return response.Models;
     }
+
     public void SetUsername(string US)
     {
         _user = US;
     }
+
     public string GetUsername()
     {
         return _user;
     }
+
     public async Task<IEnumerable<SalidasBotella>> GetBotellasNota(int num)
     {
         try
@@ -141,6 +182,7 @@ public class DataServices : IDataServices
             return null;
         }
     }
+
     public async Task<IEnumerable<SalidasBarril>> GetBarrilesNota(int num)
     {
         try
