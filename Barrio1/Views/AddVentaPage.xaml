@@ -9,8 +9,8 @@
     x:DataType="viewmodel:AddVentaViewModel"
     >
     <ContentPage.Behaviors>
-        <toolkit:EventToCommandBehavior Command="{Binding getBarrilesCommand}" EventName="Appearing" />
-        <toolkit:EventToCommandBehavior Command="{Binding getBotellasCommand}" EventName="Appearing" />
+        <toolkit:EventToCommandBehavior Command="{Binding GetBarrilesCommand}" EventName="Appearing" />
+        <toolkit:EventToCommandBehavior Command="{Binding GetBotellasCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
 
     <ScrollView>
