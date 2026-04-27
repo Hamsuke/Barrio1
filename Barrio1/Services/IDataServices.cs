@@ -10,15 +10,16 @@ namespace Barrio1.Services
         Task BulkCreateSalidaBotella(IEnumerable<SalidasBotella> salidas);
         Task UpdateVenta(Ventas venta);
         Task<bool> Login(Users u);
+        Task<IEnumerable<Ventas>> GetNota(int nota);
         Task<IEnumerable<Botellas>> GetBotellas();
         Task<IEnumerable<Botellas>> GetBotellasDisp();
         Task<IEnumerable<Barriles>> GetBarriles();
         Task<IEnumerable<Barriles>> GetBarrilesDisp();
         Task<IEnumerable<SalidasBotella>> GetBotellasNota(int num);
         Task<IEnumerable<SalidasBarril>> GetBarrilesNota(int num);
-        void SetUsername(string US);
+        void SetUsername(string us);
         string GetUsername();
-        public Task updateBotella(SalidasBotella salida);
-        public Task updateBarril(SalidasBarril salida);
+        public Task UpdateBotella(SalidasBotella salida);
+        public Task UpdateBarril(SalidasBarril salida);
     }
 }

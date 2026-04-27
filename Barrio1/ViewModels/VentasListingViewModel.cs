@@ -10,27 +10,53 @@ public partial class VentasListingViewModel : ObservableObject
 {
     private readonly IDataServices _dataService;
 
-    public ObservableCollection<Ventas> Ventas { get; set; } = new();
-    public DateTime MinDate { get; set; }
-    public DateTime MaxDate { get; set; }
+    public ObservableCollection<Ventas> ventas { get; set; } = new();
+    public DateTime minDate { get; set; }
+    public DateTime maxDate { get; set; }
     public DateTime inicioMes { get; set; }
 
     [ObservableProperty]
     private DateTime _selectedDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
 
+    [ObservableProperty] 
+    private int _notaABuscar;
+
     public VentasListingViewModel(IDataServices dataService)
     {
         _dataService = dataService;
-        MinDate = new DateTime(2024, 12, 01);
-        MaxDate = DateTime.Now;
+        minDate = new DateTime(2024, 12, 01);
+        maxDate = DateTime.Now;
         inicioMes = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+    }
 
+    [RelayCommand]
+    public async Task BuscarNotas()
+    {
+
+        try
+        {
+            var nota = await _dataService.GetNota(NotaABuscar);
+            if (nota == null || !nota.Any())
+            {
+                await Shell.Current.DisplayAlert("Error", "No se encontraron notas con ese numero", "OK");
+            }
+            else
+            {
+                ventas.Clear();
+                ventas.Add(nota.FirstOrDefault());
+            }
+
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+        }
     }
 
     [RelayCommand]
     public async Task GetVentas()
     {
-        Ventas.Clear();
+        ventas.Clear();
         try
         {
             // Obtener todas las ventas del mes
@@ -39,13 +65,12 @@ public partial class VentasListingViewModel : ObservableObject
             if (ventas.Any())
             {
                 // Filtrar las ventas del mes actual
-
-
+                
                 var ventasDelMes = ventas.ToList();
 
                 foreach (var venta in ventasDelMes)
                 {
-                    Ventas.Add(venta);
+                    this.ventas.Add(venta);
                 }
             }
         }
@@ -64,10 +89,10 @@ public partial class VentasListingViewModel : ObservableObject
         var ventas = await _dataService.GetVentas(inicioDeMes, SelectedDate);
 
         // Limpiar y actualizar la lista visible
-        Ventas.Clear();
+        this.ventas.Clear();
         foreach (var venta in ventas)
         {
-            Ventas.Add(venta);
+            this.ventas.Add(venta);
         }
     }
 

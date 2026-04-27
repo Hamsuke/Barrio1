@@ -19,7 +19,7 @@
           RowSpacing="20"
           ColumnSpacing="10">
         <Label Text="Botellas" Grid.Column="0" Grid.Row="0"/>
-        <CollectionView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding InventarioBo}">
+        <CollectionView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding inventarioBo}">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout ItemSpacing="6" Orientation="Vertical" />
             </CollectionView.ItemsLayout>
@@ -38,7 +38,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
         <Label Grid.Column="1" Grid.Row="0" Text="Barriles"/>
-        <CollectionView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding InventarioBa}">
+        <CollectionView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding inventarioBa}">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout ItemSpacing="6" Orientation="Vertical" />
             </CollectionView.ItemsLayout>

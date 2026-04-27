@@ -28,10 +28,10 @@ public partial class AddVentaViewModel(IDataServices dataService) : ObservableOb
     [ObservableProperty]
     private string _metodo;
 
-    public ObservableCollection<Botellas> BotellasDisponibles { get; set; } = [];
-    public ObservableCollection<Barriles> BarrilesDisponibles { get; set; } = [];
-    public ObservableCollection<SalidasBotella> SalidasBotellas { get; set; } = [];
-    public ObservableCollection<SalidasBarril> SalidasBarriles { get; set; } = [];
+    public ObservableCollection<Botellas> botellasDisponibles { get; set; } = [];
+    public ObservableCollection<Barriles> barrilesDisponibles { get; set; } = [];
+    public ObservableCollection<SalidasBotella> salidasBotellas { get; set; } = [];
+    public ObservableCollection<SalidasBarril> salidasBarriles { get; set; } = [];
 
     private static async Task RetryAsync(Func<Task> action, int maxRetries = 3, int delayMs = 500)
     {
@@ -43,7 +43,7 @@ public partial class AddVentaViewModel(IDataServices dataService) : ObservableOb
                 await action();
                 break; // Éxito → salimos del bucle
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 retries++;
                 if (retries > maxRetries)
@@ -58,15 +58,15 @@ public partial class AddVentaViewModel(IDataServices dataService) : ObservableOb
     [RelayCommand]
     public async Task GetBotellas()
     {
-        BotellasDisponibles.Clear();
-        SalidasBotellas.Clear();
+        botellasDisponibles.Clear();
+        salidasBotellas.Clear();
 
         var botellas = await dataService.GetBotellasDisp();
 
         foreach (var item in botellas)
         {
-            BotellasDisponibles.Add(item);
-            SalidasBotellas.Add(new SalidasBotella
+            botellasDisponibles.Add(item);
+            salidasBotellas.Add(new SalidasBotella
             {
                 id = 0,
                 botella = item.nombreBo,
@@ -78,15 +78,15 @@ public partial class AddVentaViewModel(IDataServices dataService) : ObservableOb
     [RelayCommand]
     public async Task GetBarriles()
     {
-        BarrilesDisponibles.Clear();
-        SalidasBarriles.Clear();
+        barrilesDisponibles.Clear();
+        salidasBarriles.Clear();
 
         var barriles = await dataService.GetBarrilesDisp();
 
         foreach (var item in barriles.AsEnumerable().Reverse())
         {
-            BarrilesDisponibles.Add(item);
-            SalidasBarriles.Add(new SalidasBarril
+            barrilesDisponibles.Add(item);
+            salidasBarriles.Add(new SalidasBarril
             {
                 id = 0,
                 barril = item.nombreBa,
@@ -128,7 +128,7 @@ public partial class AddVentaViewModel(IDataServices dataService) : ObservableOb
             await RetryAsync(() => dataService.CreateVenta(venta));
 
 
-            var salidasBotellasList = SalidasBotellas
+            var salidasBotellasList = salidasBotellas
                 .Where(item => item.cant > 0)
                 .Select(item => new SalidasBotella
                 {
@@ -148,7 +148,7 @@ public partial class AddVentaViewModel(IDataServices dataService) : ObservableOb
                     try
                     {
                         foreach (var salida in salidasBotellasList)
-                            await RetryAsync(() => dataService.updateBotella(salida));
+                            await RetryAsync(() => dataService.UpdateBotella(salida));
                     }
                     catch (Exception ex)
                     {
@@ -158,7 +158,7 @@ public partial class AddVentaViewModel(IDataServices dataService) : ObservableOb
             }
 
 
-            var salidasBarrilesList = SalidasBarriles
+            var salidasBarrilesList = salidasBarriles
                 .Where(item => item.cant > 0)
                 .Select(item => new SalidasBarril
                 {
@@ -177,7 +177,7 @@ public partial class AddVentaViewModel(IDataServices dataService) : ObservableOb
                     try
                     {
                         foreach (var salida in salidasBarrilesList)
-                            await RetryAsync(() => dataService.updateBarril(salida));
+                            await RetryAsync(() => dataService.UpdateBarril(salida));
                     }
                     catch (Exception ex)
                     {

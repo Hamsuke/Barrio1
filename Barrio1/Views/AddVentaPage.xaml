@@ -46,7 +46,7 @@
                     
                     <Grid ColumnDefinitions="0.55*,*">
                         <StackLayout Grid.Column="0">
-                            <CollectionView ItemsSource="{Binding SalidasBotellas}">
+                            <CollectionView ItemsSource="{Binding salidasBotellas}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="model:SalidasBotella">
                                         <Grid Padding="0" ColumnDefinitions="*, auto">
@@ -58,7 +58,7 @@
                             </CollectionView>
                         </StackLayout>
                         <StackLayout Grid.Column="1">
-                            <CollectionView ItemsSource="{Binding BotellasDisponibles}">
+                            <CollectionView ItemsSource="{Binding botellasDisponibles}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="model:Botellas">
                                         <Grid Padding="14" ColumnDefinitions="*, auto">
@@ -80,7 +80,7 @@
                     </Grid>
                     <Grid ColumnDefinitions="0.55*,*">
                         <StackLayout Grid.Column="0">
-                            <CollectionView ItemsSource="{Binding SalidasBarriles}">
+                            <CollectionView ItemsSource="{Binding salidasBarriles}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="model:SalidasBarril">
                                         <Grid Padding="0" ColumnDefinitions="*, auto">
@@ -92,7 +92,7 @@
                             </CollectionView>
                         </StackLayout>
                         <StackLayout Grid.Column="1">
-                            <CollectionView ItemsSource="{Binding BarrilesDisponibles}">
+                            <CollectionView ItemsSource="{Binding barrilesDisponibles}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="model:Barriles">
                                         <Grid Padding="14" ColumnDefinitions="*, auto">

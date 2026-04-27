@@ -22,8 +22,8 @@ namespace Barrio1
 
             //Servicios integrados
             //Supabase
-            var url = AppConfig.supaUrl;
-            var key = AppConfig.supaKey;
+            var url = AppConfig.SupaUrl;
+            var key = AppConfig.SupaKey;
             var options = new Supabase.SupabaseOptions
             {
                 Schema = "barriochico"

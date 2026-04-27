@@ -13,14 +13,14 @@ public partial class InventarioViewModel : ObservableObject
         _dataService = dataService;
     }
 
-    public ObservableCollection<Barriles> InventarioBa { get; set; } = new();
-    public ObservableCollection<Botellas> InventarioBo { get; set; } = new();
+    public ObservableCollection<Barriles> inventarioBa { get; set; } = new();
+    public ObservableCollection<Botellas> inventarioBo { get; set; } = new();
 
     [RelayCommand]
     public async Task GetInventario()
     {
-        InventarioBo.Clear();
-        InventarioBa.Clear();
+        inventarioBo.Clear();
+        inventarioBa.Clear();
         var stockBo = await _dataService.GetBotellas();
         var stockBa = await _dataService.GetBarriles();
 
@@ -29,12 +29,12 @@ public partial class InventarioViewModel : ObservableObject
 
         foreach (var item in stockBotellas)
         {
-            InventarioBo.Add(item);
+            inventarioBo.Add(item);
         }
 
-        foreach(var item in stockBa)
+        foreach(var item in stockBarriles)
         {
-            InventarioBa.Add(item);
+            inventarioBa.Add(item);
         }
 
     }

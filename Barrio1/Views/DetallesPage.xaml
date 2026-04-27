@@ -64,7 +64,7 @@
                         <Label Text="Botellas" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,10"/>
 
                         <!-- CollectionView for SalidasBotella -->
-                        <CollectionView ItemsSource="{Binding SalidasBotella}">
+                        <CollectionView ItemsSource="{Binding salidasBotella}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="model:SalidasBotella">
                                     <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
@@ -93,7 +93,7 @@
                         <Label Text="Barriles" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,10"/>
 
                         <!-- CollectionView for SalidasBotella -->
-                        <CollectionView ItemsSource="{Binding SalidasBarril}">
+                        <CollectionView ItemsSource="{Binding salidasBarril}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="model:SalidasBarril">
                                     <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">

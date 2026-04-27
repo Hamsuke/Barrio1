@@ -13,8 +13,8 @@ public partial class DetallesViewModel : ObservableObject
 {
     private readonly IDataServices _dataServices;
 
-    public ObservableCollection<SalidasBotella> SalidasBotella { get; set; } = new();
-    public ObservableCollection<SalidasBarril> SalidasBarril { get; set; } = new();
+    public ObservableCollection<SalidasBotella> salidasBotella { get; set; } = new();
+    public ObservableCollection<SalidasBarril> salidasBarril { get; set; } = new();
 
     [ObservableProperty]
     private Ventas _venta;
@@ -33,8 +33,8 @@ public partial class DetallesViewModel : ObservableObject
     {
         Fecha1 = new DateOnly(Venta.dateC.Year, Venta.dateC.Month, Venta.dateC.Day);
         Fecha2 = new DateOnly(Venta.dateP.Year, Venta.dateP.Month, Venta.dateP.Day);
-        SalidasBarril.Clear();
-        SalidasBotella.Clear();
+        salidasBarril.Clear();
+        salidasBotella.Clear();
 
         if (Venta == null)
         {
@@ -56,7 +56,7 @@ public partial class DetallesViewModel : ObservableObject
                 // Add Botellas to the collection
                 foreach (var item in lista)
                 {
-                    SalidasBotella.Add(item);
+                    salidasBotella.Add(item);
                 }
             }
         }
@@ -80,7 +80,7 @@ public partial class DetallesViewModel : ObservableObject
                 // Add Barriles to the collection
                 foreach (var item in lista)
                 {
-                    SalidasBarril.Add(item);
+                    salidasBarril.Add(item);
                 }
             }
         }

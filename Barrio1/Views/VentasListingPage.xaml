@@ -21,110 +21,127 @@
     </ContentPage.Behaviors>
 
     <Grid
-        Margin="30"
-        RowDefinitions="Auto,*"
-        RowSpacing="20">
+    Margin="30"
+    RowDefinitions="Auto,Auto,*"
+    RowSpacing="20">
 
-        <!-- Encabezado -->
-        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,*" RowDefinitions="*,Auto,Auto" RowSpacing="4">
-            <Image
-                Grid.Column="0"
-                Grid.RowSpan="3"
-                Source="maquina.svg"
-                Aspect="AspectFill"
-                HeightRequest="100"
-                WidthRequest="100"
-                />
-            <Label
-                Grid.Row="1"
-                Grid.Column="1"
-                FontAttributes="Bold"
-                FontSize="Title"
-                Text="Ventas"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="Center"
-                />
+    <!-- Encabezado -->
+    <Grid Grid.Row="0" ColumnDefinitions="Auto,*,*" RowDefinitions="*,Auto,Auto" RowSpacing="4">
 
-            <Button
-                Grid.Row="0"
-                Grid.Column="2"
-                Command="{Binding GetInventarioCommand}"
-                Text="Inventario"
-                />
+        <Image
+            Grid.Column="0"
+            Grid.RowSpan="3"
+            Source="maquina.svg"
+            Aspect="AspectFill"
+            HeightRequest="100"
+            WidthRequest="100" />
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            FontAttributes="Bold"
+            FontSize="Title"
+            HorizontalOptions="CenterAndExpand"
+            Text="Ventas"
+            VerticalOptions="Center" />
 
-            <Button
-                Grid.Row="1"
-                Grid.Column="2"
-                Command="{Binding AddVentaCommand}"
-                Text="Nueva venta"
-                />
+        <Button
+            Grid.Row="0"
+            Grid.Column="2"
+            Command="{Binding GetInventarioCommand}"
+            Text="Inventario" />
 
+        <Button
+            Grid.Row="1"
+            Grid.Column="2"
+            Command="{Binding AddVentaCommand}"
+            Text="Nueva venta" />
 
-            <!-- Filtro de fechas -->
+        <!-- Filtro de fechas -->
+        <DatePicker
+            x:Name="DatePicker"
+            Grid.Row="2"
+            Grid.Column="1"
+            Date="{Binding SelectedDate}"
+            Format="MM yyyy"
+            HorizontalOptions="CenterAndExpand"
+            MaximumDate="{Binding maxDate}"
+            MinimumDate="{Binding minDate}" />
 
-            <DatePicker Grid.Row="2" Grid.Column="1"
-                        x:Name="DatePicker"
-                        Format="MM yyyy"
-                        MaximumDate="{Binding MaxDate}"
-                        MinimumDate="{Binding MinDate}"
-                        Date="{Binding SelectedDate}"
-                        HorizontalOptions="CenterAndExpand">
-
-            </DatePicker>
-            
-            <Button
-                    Grid.Row="2"
-                    Grid.Column="2"
-                    Text="Filtrar"
-                    Command="{Binding FiltrarVentasCommand}"
-                    Style="{DynamicResource Boton}"
-                    />
-        </Grid>
-
-        <!-- Listado -->
-        <CollectionView Grid.Row="2" ItemsSource="{Binding Ventas}">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout ItemSpacing="6" Orientation="Vertical" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:Ventas">
-                    <Border
-                        Padding="15"
-                        Stroke="Dimgray"
-                        StrokeThickness="1">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="10" />
-                        </Border.StrokeShape>
-                        <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
-                            <Label
-                                Grid.Row="0"
-                                FontAttributes="Bold"
-                                Text="{Binding id, StringFormat='Nota: {0}'}" />
-                            <Label
-                                Grid.Row="1"
-                                Text="{Binding name, StringFormat='Cliente: {0}'}"/>
-                            <Label
-                                Grid.Row="2"
-                                Text="{Binding est, Converter={StaticResource BoolToObjectConverter}}"
-                                />
-
-                            <StackLayout Orientation="Vertical" HorizontalOptions="End" Grid.Row="0" Grid.RowSpan="3">
-                                <Button
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:VentasListingViewModel}}, Path=DetallesNotaCommand}"
-                                    CommandParameter="{Binding .}"
-                                    Text="Detalles"
-                                    />
-
-                                <Button
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:VentasListingViewModel}}, Path=UpdateVentaCommand}"
-                                    CommandParameter="{Binding .}"
-                                    Text="Actualizar"
-                                    />
-                            </StackLayout>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <Button
+            Grid.Row="2"
+            Grid.Column="2"
+            Command="{Binding FiltrarVentasCommand}"
+            Style="{DynamicResource Boton}"
+            Text="Filtrar" />
     </Grid>
+
+    <!-- Sección de búsqueda -->
+    <Grid
+        Grid.Row="1"
+        ColumnDefinitions="*,Auto"
+        ColumnSpacing="10">
+        <Entry
+            Grid.Column="0"
+            Keyboard="Numeric"
+            Placeholder="Buscar nota por número"
+            Text="{Binding NotaABuscar}" />
+
+        <Button
+            Grid.Column="1"
+            Command="{Binding BuscarNotasCommand}"
+            Text="Buscar" />
+    </Grid>
+
+    <!-- Listado -->
+    <CollectionView Grid.Row="2" ItemsSource="{Binding ventas}">
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout
+                ItemSpacing="6"
+                Orientation="Vertical" />
+        </CollectionView.ItemsLayout>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="model:Ventas">
+                <Border
+                    Padding="15"
+                    Stroke="Dimgray"
+                    StrokeThickness="1">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10" />
+                    </Border.StrokeShape>
+                    <Grid
+                        RowDefinitions="Auto,Auto,Auto"
+                        RowSpacing="10">
+                        <Label
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            Text="{Binding id, StringFormat='Nota: {0}'}" />
+                        <Label
+                            Grid.Row="1"
+                            Text="{Binding name, StringFormat='Cliente: {0}'}" />
+                        <Label
+                            Grid.Row="2"
+                            Text="{Binding est, Converter={StaticResource BoolToObjectConverter}}" />
+
+                        <StackLayout
+                            Grid.Row="0"
+                            Grid.RowSpan="3"
+                            HorizontalOptions="End"
+                            Orientation="Vertical">
+                            <Button
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:VentasListingViewModel}}, Path=DetallesNotaCommand}"
+                                CommandParameter="{Binding .}"
+                                Text="Detalles" />
+
+                            <Button
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:VentasListingViewModel}}, Path=UpdateVentaCommand}"
+                                CommandParameter="{Binding .}"
+                                Text="Actualizar" />
+                        </StackLayout>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</Grid>
 </ContentPage>
