@@ -18,6 +18,6 @@ public class SalidasBarril : BaseModel
     public string barril { get; set; }
 
     [Column("cantidad")]
-    public int cant { get; set; }
+    public int cantBa { get; set; }
 
 }

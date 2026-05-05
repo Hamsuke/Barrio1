@@ -71,7 +71,7 @@ public class DataServices : IDataServices
         // Evitar que la cantidad sea negativa
         if (botella != null)
         {
-            botella.cantidadBo = Math.Max(0, botella.cantidadBo - salida.cant);
+            botella.cantidadBo = Math.Max(0, botella.cantidadBo - salida.cantBo);
 
             // Actualizar por Id (más eficiente que buscar otra vez)
             await _supabaseClient
@@ -90,7 +90,7 @@ public class DataServices : IDataServices
         // Evitar que la cantidad sea negativa
         if (barril != null)
         {
-            barril.cantidadBa = Math.Max(0, barril.cantidadBa - salida.cant);
+            barril.cantidadBa = Math.Max(0, barril.cantidadBa - salida.cantBa);
 
             // Actualizar por Id (más eficiente que buscar otra vez)
             await _supabaseClient

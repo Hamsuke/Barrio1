@@ -70,7 +70,7 @@ public partial class AddVentaViewModel(IDataServices dataService) : ObservableOb
             {
                 id = 0,
                 botella = item.nombreBo,
-                cant = 0
+                cantBo = 0
             });
         }
     }
@@ -90,7 +90,7 @@ public partial class AddVentaViewModel(IDataServices dataService) : ObservableOb
             {
                 id = 0,
                 barril = item.nombreBa,
-                cant = 0
+                cantBa = 0
             });
         }
     }
@@ -103,6 +103,12 @@ public partial class AddVentaViewModel(IDataServices dataService) : ObservableOb
             if (string.IsNullOrEmpty(VentaCliente))
             {
                 await Shell.Current.DisplayAlert("Error", "No hay Cliente!", "OK");
+                return;
+            }
+
+            if (Nota <= 0)
+            {
+                await Shell.Current.DisplayAlert("Error", "Nota de venta no válida!", "OK");
                 return;
             }
 
@@ -129,12 +135,12 @@ public partial class AddVentaViewModel(IDataServices dataService) : ObservableOb
 
 
             var salidasBotellasList = salidasBotellas
-                .Where(item => item.cant > 0)
+                .Where(item => item.cantBo > 0)
                 .Select(item => new SalidasBotella
                 {
                     id = Nota,
                     botella = item.botella,
-                    cant = item.cant
+                    cantBo = item.cantBo
                 })
                 .ToList();
 
@@ -159,18 +165,18 @@ public partial class AddVentaViewModel(IDataServices dataService) : ObservableOb
 
 
             var salidasBarrilesList = salidasBarriles
-                .Where(item => item.cant > 0)
+                .Where(item => item.cantBa > 0)
                 .Select(item => new SalidasBarril
                 {
                     id = Nota,
                     barril = item.barril,
-                    cant = item.cant
+                    cantBa = item.cantBa
                 })
                 .ToList();
 
             if (salidasBarrilesList.Count != 0)
             {
-                await RetryAsync(() => dataService.BulkCreateSalidaBotella(salidasBotellasList));
+                await RetryAsync(() => dataService.BulkCreateSalidaBarril(salidasBarrilesList));
 
                 _ = Task.Run(async () =>
                 {

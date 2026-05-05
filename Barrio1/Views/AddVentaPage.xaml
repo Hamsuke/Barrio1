@@ -50,7 +50,7 @@
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="model:SalidasBotella">
                                         <Grid Padding="0" ColumnDefinitions="*, auto">
-                                            <Entry Keyboard="Numeric" Text="{Binding cant}" 
+                                            <Entry Keyboard="Numeric" Text="{Binding cantBo}" 
                                                    HorizontalTextAlignment="Center"/>
                                         </Grid>
                                     </DataTemplate>
@@ -84,7 +84,7 @@
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="model:SalidasBarril">
                                         <Grid Padding="0" ColumnDefinitions="*, auto">
-                                            <Entry Keyboard="Numeric" Text="{Binding cant}"
+                                            <Entry Keyboard="Numeric" Text="{Binding cantBa}"
                                                    HorizontalTextAlignment="Center"/>
                                         </Grid>
                                     </DataTemplate>

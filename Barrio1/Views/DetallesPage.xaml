@@ -72,7 +72,7 @@
                                         <Label Grid.Row="1" FontSize="12" VerticalOptions="Center" Grid.Column="0" Text="{Binding botella}"/>
 
                                         <!-- Cantidad Label -->
-                                        <Label Grid.Row="1" FontSize="12" VerticalTextAlignment="Center" Grid.Column="1" Text="{Binding cant}"/>
+                                        <Label Grid.Row="1" FontSize="12" VerticalTextAlignment="Center" Grid.Column="1" Text="{Binding cantBo}"/>
                                     </Grid>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
@@ -101,7 +101,7 @@
                                         <Label Grid.Row="1" FontSize="10" VerticalOptions="Center" Grid.Column="0" Text="{Binding barril}"/>
 
                                         <!-- Cantidad Label -->
-                                        <Label Grid.Row="1" FontSize="10" VerticalOptions="Center" Grid.Column="1" Text="{Binding cant}"/>
+                                        <Label Grid.Row="1" FontSize="10" VerticalOptions="Center" Grid.Column="1" Text="{Binding cantBa}"/>
                                     </Grid>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>

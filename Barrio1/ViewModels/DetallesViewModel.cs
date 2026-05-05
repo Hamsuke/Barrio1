@@ -53,7 +53,6 @@ public partial class DetallesViewModel : ObservableObject
             else
             {
                 var lista = botellas.ToList();
-                // Add Botellas to the collection
                 foreach (var item in lista)
                 {
                     salidasBotella.Add(item);
@@ -63,12 +62,10 @@ public partial class DetallesViewModel : ObservableObject
         catch (Exception ex)
         {
             Console.WriteLine($"Error retrieving botellas data: {ex.Message}");
-            // Optional: Log the exception or notify the user about the failure
         }
 
         try
         {
-            // Get Barriles data
             var barriles = await _dataServices.GetBarrilesNota(Venta.id);
             if (barriles == null || !barriles.Any())
             {
@@ -77,7 +74,6 @@ public partial class DetallesViewModel : ObservableObject
             else
             {
                 var lista = barriles.ToList();
-                // Add Barriles to the collection
                 foreach (var item in lista)
                 {
                     salidasBarril.Add(item);
@@ -87,10 +83,7 @@ public partial class DetallesViewModel : ObservableObject
         catch (Exception ex)
         {
             Console.WriteLine($"Error retrieving barriles data: {ex.Message}");
-            // Optional: Log the exception or notify the user about the failure
         }
-
-        // Safely update properties after null check (if needed)
     }
 
 }
